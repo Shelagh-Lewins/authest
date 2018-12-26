@@ -1,55 +1,62 @@
 // authentication.js
-
-// import axios from 'axios';
-import { GET_ERRORS } from './types';
+import setAuthToken from '../setAuthToken';
+import jwt_decode from 'jwt-decode';
+import { GET_ERRORS, SET_CURRENT_USER } from './types';
 
 export const registerUser = (user, history) => dispatch => {
-    // axios.post('/api/users/register', user)
-    console.log('user ', user);
-    console.log('tyepof user ', typeof user);
-
-    var FD  = new FormData();
+	var formData  = new FormData();
 
   // Push our data into our FormData object
-  /* Object.keys(user).forEach((key) => {
-    FD.append(key, user[key]);
-  }
-) */
-
   for(var name in user) {
-    FD.append(name, user[name]);
+		formData.append(name, user[name]);
   }
+  /*
+  for (var pair of formData.entries()) {
+		console.log(pair[0]+ ', ' + pair[1]); 
+	} */
 
-  for (var pair of FD.entries()) {
-    console.log(pair[0]+ ', ' + pair[1]); 
-}
-
-    // let body = JSON.stringify(user);
-    let headers = { 'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json' };
-
-        fetch('/api/v1/rest-auth/registration/', { 'method': 'POST', 'body': FD })
-        // fetch('/api/v1/rest-auth/registration/', { headers, 'method': 'POST', body })
-            .then(res => history.push('/registration'))
-            .catch(err => {
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err.response.data
-                });
-            });
+	fetch('/api/v1/rest-auth/registration/', { 'method': 'POST', 'body': formData })
+		.then(res => history.push('/registration'))
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			});
+		});
 }
 
 export const loginUser = (user) => dispatch => {
-    // axios.post('/api/users/login', user)
-    let headers = { 'Content-Type': 'application/json' };
+	var formData  = new FormData();
 
-        fetch('/api/v1/rest-auth/login/', { headers, 'method': 'POST' })
-            .then(res => {
-                console.log(res.data);
-            })
-            .catch(err => {
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err.response.data
-                });
-            });
+	// Push our data into our FormData object
+  for(var name in user) {
+		formData.append(name, user[name]);
+  }
+
+	return fetch('/api/v1/rest-auth/login/', { 'method': 'POST', 'body': formData })
+		.then(res => {
+			return res.json();
+		})
+		.then(token => {
+			console.log('token 1 ', token);
+			localStorage.setItem('jwtToken', token);
+      setAuthToken(token);
+      //const decoded = jwt_decode(token);
+      return dispatch(setCurrentUser(token));
+		})
+		.catch(err => {
+			console.log('error ', err.message);
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			});
+		});
+}
+
+export const setCurrentUser = decoded => {
+	console.log('data ', decoded);
+  return {
+      type: SET_CURRENT_USER,
+      payload: decoded
+  }
 }

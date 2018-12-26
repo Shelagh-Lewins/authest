@@ -11,7 +11,7 @@ class Login extends Component {
     constructor() {
         super();
         this.state = {
-            email: '',
+            username: '',
             password: '',
             errors: {}
         }
@@ -28,7 +28,7 @@ class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const user = {
-            email: this.state.email,
+            username: this.state.username,
             password: this.state.password,
         }
         this.props.loginUser(user);
@@ -51,16 +51,16 @@ class Login extends Component {
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
-                    type="email"
-                    placeholder="Email"
+                    type="username"
+                    placeholder="Username"
                     className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.email
+                        'is-invalid': errors.username
                     })}
-                    name="email"
+                    name="username"
                     onChange={ this.handleInputChange }
-                    value={ this.state.email }
+                    value={ this.state.username }
                     />
-                    {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
+                    {errors.username && (<div className="invalid-feedback">{errors.username}</div>)}
                 </div>
                 <div className="form-group">
                     <input
