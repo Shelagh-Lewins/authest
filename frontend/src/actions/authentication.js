@@ -38,11 +38,13 @@ export const loginUser = (user) => dispatch => {
 			return res.json();
 		})
 		.then(token => {
-			console.log('token 1 ', token);
-			localStorage.setItem('jwtToken', token);
-      setAuthToken(token);
+			console.log('token 1 ', token.key);
+			// token is an object { key: value }
+			// localStorage can only store a string so we'll use just the value everywhere for consistency
+			localStorage.setItem('jwtToken', token.key);
+      setAuthToken(token.key);
       //const decoded = jwt_decode(token);
-      return dispatch(setCurrentUser(token));
+      return dispatch(setCurrentUser(token.key));
 		})
 		.catch(err => {
 			console.log('error ', err.message);
@@ -53,10 +55,17 @@ export const loginUser = (user) => dispatch => {
 		});
 }
 
-export const setCurrentUser = decoded => {
-	console.log('data ', decoded);
+export const setCurrentUser = token => {
+	console.log('data ', token);
   return {
       type: SET_CURRENT_USER,
-      payload: decoded
+      payload: token
   }
+}
+
+export const logoutUser = (history) => dispatch => {
+    localStorage.removeItem('jwtToken');
+    setAuthToken(false);
+    dispatch(setCurrentUser({}));
+    history.push('/login');
 }

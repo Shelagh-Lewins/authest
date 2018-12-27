@@ -12,10 +12,10 @@ class Register extends Component {
     constructor() {
         super();
         this.state = {
-            username: '',
+            name: '',
             email: '',
-            password1: '',
-            password2: '',
+            password: '',
+            password_confirm: '',
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -31,19 +31,28 @@ class Register extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const user = {
-            username: this.state.username,
+            name: this.state.name,
             email: this.state.email,
-            password1: this.state.password1,
-            password2: this.state.password2
+            password: this.state.password,
+            password_confirm: this.state.password_confirm
         }
         this.props.registerUser(user, this.props.history);
     }
 
     componentWillReceiveProps(nextProps) {
+        if(nextProps.auth.isAuthenticated) {
+            this.props.history.push('/')
+        }
         if(nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
             });
+        }
+    }
+
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated) {
+            this.props.history.push('/');
         }
     }
 
@@ -60,11 +69,11 @@ class Register extends Component {
                     className={classnames('form-control form-control-lg', {
                         'is-invalid': errors.name
                     })}
-                    name="username"
+                    name="name"
                     onChange={ this.handleInputChange }
-                    value={ this.state.username }
+                    value={ this.state.name }
                     />
-                    {errors.username && (<div className="invalid-feedback">{errors.username}</div>)}
+                    {errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
                 </div>
                 <div className="form-group">
                     <input
@@ -86,24 +95,24 @@ class Register extends Component {
                     className={classnames('form-control form-control-lg', {
                         'is-invalid': errors.password
                     })}
-                    name="password1"
+                    name="password"
                     onChange={ this.handleInputChange }
-                    value={ this.state.password1 }
+                    value={ this.state.password }
                     />
-                    {errors.password1 && (<div className="invalid-feedback">{errors.password1}</div>)}
+                    {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
                 </div>
                 <div className="form-group">
                     <input
                     type="password"
                     placeholder="Confirm Password"
                     className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.password2
+                        'is-invalid': errors.password_confirm
                     })}
-                    name="password2"
+                    name="password_confirm"
                     onChange={ this.handleInputChange }
-                    value={ this.state.password2 }
+                    value={ this.state.password_confirm }
                     />
-                    {errors.password2 && (<div className="invalid-feedback">{errors.password2}</div>)}
+                    {errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary">
@@ -118,9 +127,11 @@ class Register extends Component {
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
+    auth: state.auth,
     errors: state.errors
 });
 
