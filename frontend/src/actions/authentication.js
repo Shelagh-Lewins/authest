@@ -1,7 +1,13 @@
 // authentication.js
 import setAuthToken from '../setAuthToken';
-import jwt_decode from 'jwt-decode';
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
+// import jwt_decode from 'jwt-decode';
+import {
+	GET_ERRORS,
+	SET_CURRENT_USER,
+	FORGOT_PASSWORD_EMAIL_NOT_SENT,
+	FORGOT_PASSWORD_EMAIL_SENT,
+	RESET_PASSWORD
+} from './types';
 
 export const registerUser = (user, history) => dispatch => {
 	var formData  = new FormData();
@@ -38,7 +44,6 @@ export const loginUser = (user) => dispatch => {
 			return res.json();
 		})
 		.then(token => {
-			console.log('token 1 ', token.key);
 			// token is an object { key: value }
 			// localStorage can only store a string so we'll use just the value everywhere for consistency
 			localStorage.setItem('jwtToken', token.key);
@@ -56,7 +61,6 @@ export const loginUser = (user) => dispatch => {
 }
 
 export const setCurrentUser = token => {
-	console.log('data ', token);
   return {
       type: SET_CURRENT_USER,
       payload: token
@@ -68,4 +72,50 @@ export const logoutUser = (history) => dispatch => {
     setAuthToken(false);
     dispatch(setCurrentUser({}));
     history.push('/login');
+}
+
+///////////////////////////////
+// reset password
+export const forgotPasswordEmailNotSent = token => {
+  return {
+      type: FORGOT_PASSWORD_EMAIL_NOT_SENT
+  }
+}
+
+export const forgotPasswordEmailSent = () => {
+  return {
+      type: FORGOT_PASSWORD_EMAIL_SENT
+  }
+}
+
+export const forgotPassword = (email) => dispatch => {
+	console.log('forgotPassword action creator. Email ', email);
+
+	var formData  = new FormData();
+
+	// Push our data into our FormData object
+  for(var name in email) {
+		formData.append(name, email[name]);
+  }
+
+	return fetch('/api/v1/rest-auth/password/reset/', { 'method': 'POST', 'body': formData })
+		.then(res => {
+			return res.json();
+		})
+		.then(thing => {
+      return dispatch(forgotPasswordEmailSent());
+		})
+		.catch(err => {
+			console.log('error ', err.message);
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data
+			});
+		});
+}
+
+export const resetPassword = () => {
+  return {
+      type: RESET_PASSWORD
+  }
 }

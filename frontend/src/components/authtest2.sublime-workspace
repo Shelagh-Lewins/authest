@@ -1,0 +1,1233 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sho",
+				"showDropdown"
+			],
+			[
+				"exp",
+				"expectedAction"
+			],
+			[
+				"mo",
+				"mockStore"
+			],
+			[
+				"conf",
+				"configureMockStore"
+			],
+			[
+				"lists",
+				"listsList"
+			],
+			[
+				"to",
+				"toBe"
+			],
+			[
+				"handl",
+				"handlePublicTimer"
+			],
+			[
+				"e",
+				"expectedAction"
+			],
+			[
+				"it",
+				"iterator"
+			],
+			[
+				"list",
+				"listsByIsPublic"
+			],
+			[
+				"expecte",
+				"expectedActions"
+			],
+			[
+				"createItem",
+				"createItemRequested"
+			],
+			[
+				"cur",
+				"currentListId"
+			],
+			[
+				"cu",
+				"currentListId"
+			],
+			[
+				"current",
+				"currentListId"
+			],
+			[
+				"norm",
+				"normalizedData"
+			],
+			[
+				"curr",
+				"currentList"
+			],
+			[
+				"Item",
+				"ItemsPage"
+			],
+			[
+				"onC",
+				"onCurrentListChange"
+			],
+			[
+				"initial",
+				"initialPageState"
+			],
+			[
+				"fetch",
+				"fetchListsStarted"
+			],
+			[
+				"pr",
+				"props"
+			],
+			[
+				"is",
+				"is_public"
+			],
+			[
+				"sea",
+				"searchTerm"
+			],
+			[
+				"cha",
+				"channelsMap"
+			],
+			[
+				"takeL",
+				"takeLatestById"
+			],
+			[
+				"wat",
+				"watchSomethingElse"
+			],
+			[
+				"update",
+				"updatedList"
+			],
+			[
+				"num",
+				"number_of_repeats"
+			],
+			[
+				"bac",
+				"background_style"
+			],
+			[
+				"back",
+				"background_index"
+			],
+			[
+				"bro",
+				"broken_twill_threading"
+			],
+			[
+				"cell",
+				"cell_value"
+			],
+			[
+				"modul",
+				"modular_add"
+			],
+			[
+				"backgrou",
+				"background_color"
+			],
+			[
+				"change",
+				"change_sim_thread_color"
+			],
+			[
+				"ori",
+				"original_hole"
+			],
+			[
+				"or",
+				"original_hole"
+			],
+			[
+				"find",
+				"find_threading_from_offset"
+			],
+			[
+				"ogi",
+				"original_hole"
+			],
+			[
+				"manu",
+				"manual_weaving_threads"
+			],
+			[
+				"other",
+				"other_hole"
+			],
+			[
+				"this",
+				"this_thread"
+			],
+			[
+				"broken",
+				"broken_twill_threading"
+			],
+			[
+				"chart",
+				"chart_value"
+			],
+			[
+				"twill",
+				"twill_tool"
+			],
+			[
+				"manual",
+				"manual_weaving_turns"
+			],
+			[
+				"number",
+				"number_of_tablets"
+			],
+			[
+				"thread",
+				"thread_to_show"
+			],
+			[
+				"hole",
+				"hole_style"
+			],
+			[
+				"man",
+				"save_manual_weaving_turns"
+			],
+			[
+				"click",
+				"click_count"
+			],
+			[
+				"twil",
+				"twill_click_count"
+			],
+			[
+				"build",
+				"build_pattern_display_data"
+			],
+			[
+				"last_r",
+				"last_row_number"
+			],
+			[
+				"Last",
+				"last_row_number"
+			],
+			[
+				"new_t",
+				"new_turn"
+			],
+			[
+				"last_row",
+				"last_row_turns"
+			],
+			[
+				"row",
+				"row_to_edit"
+			],
+			[
+				"sim",
+				"sim_weave_mode"
+			],
+			[
+				"preview",
+				"preview_orientation"
+			],
+			[
+				"raw",
+				"raw_pattern_chart"
+			],
+			[
+				"star",
+				"weaving_start_row"
+			],
+			[
+				"weaving",
+				"weaving_start_row"
+			],
+			[
+				"start",
+				"start_row"
+			],
+			[
+				"twill_s",
+				"twill_start_row"
+			],
+			[
+				"threading",
+				"threading_now"
+			],
+			[
+				"set_p",
+				"set_preview_orientation"
+			],
+			[
+				"prev",
+				"preview_rotation"
+			],
+			[
+				"tablet",
+				"tablet_styles"
+			],
+			[
+				"Number",
+				"number_of_tablets"
+			],
+			[
+				"get",
+				"get_orientation_as_array"
+			],
+			[
+				"pattern",
+				"pattern_id"
+			],
+			[
+				"add",
+				"add_twill_row"
+			],
+			[
+				"twi",
+				"twill_pattern_chart"
+			],
+			[
+				"sele",
+				"selected_style"
+			],
+			[
+				"my",
+				"my_functions"
+			],
+			[
+				"gri",
+				"grid_value"
+			],
+			[
+				"current_tw",
+				"current_twill_pattern_chart"
+			],
+			[
+				"new",
+				"new_style"
+			],
+			[
+				"search",
+				"search_patterns"
+			],
+			[
+				"created",
+				"created_by_username"
+			],
+			[
+				"stored",
+				"stored_weave_row"
+			],
+			[
+				"recent",
+				"recent_pattern"
+			],
+			[
+				"sor",
+				"sorted_patterns"
+			],
+			[
+				"patt",
+				"pattern_ids"
+			],
+			[
+				"recent_",
+				"recent_patterns_home"
+			],
+			[
+				"recen",
+				"recent_pattern"
+			],
+			[
+				"all_patterns",
+				"all_patterns_home"
+			],
+			[
+				"publi",
+				"public_patterns_count"
+			],
+			[
+				"Recen",
+				"Recent_Patterns"
+			],
+			[
+				"patern",
+				"pattern_id"
+			],
+			[
+				"simultion",
+				"simulation_mode"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"key",
+				"keyCode"
+			],
+			[
+				"regis",
+				"registerHelper"
+			],
+			[
+				"patterns",
+				"patterns_ready"
+			],
+			[
+				"reg",
+				"registerHelper"
+			],
+			[
+				"on",
+				"onAfterAction"
+			],
+			[
+				"sing",
+				"single_pattern"
+			],
+			[
+				"patter",
+				"pattern_id"
+			],
+			[
+				"save",
+				"save_weaving_to_db"
+			],
+			[
+				"remove_",
+				"remove_weaving_row"
+			],
+			[
+				"called",
+				"called_by"
+			],
+			[
+				"chan",
+				"change_tablets_latch"
+			],
+			[
+				"result",
+				"result_type"
+			],
+			[
+				"view",
+				"view_pattern_created"
+			],
+			[
+				"long",
+				"long_floats_temp"
+			],
+			[
+				"windo",
+				"windows_color"
+			],
+			[
+				"next",
+				"next_long_float"
+			],
+			[
+				"previous",
+				"previous_long_float"
+			],
+			[
+				"long_",
+				"long_floats_chart"
+			],
+			[
+				"even",
+				"even_row"
+			],
+			[
+				"color",
+				"color_change"
+			],
+			[
+				"curren",
+				"current_color"
+			],
+			[
+				"position",
+				"position_of_A"
+			],
+			[
+				"curre",
+				"current_twill_position"
+			],
+			[
+				"modu",
+				"modular_add"
+			],
+			[
+				"backg",
+				"background_twill"
+			],
+			[
+				"analys",
+				"analyse_gtt_colors2"
+			],
+			[
+				"max",
+				"max_colors"
+			],
+			[
+				"weavin_style",
+				"weaving_style_from_threading_style"
+			],
+			[
+				"simul",
+				"simulation_mode"
+			],
+			[
+				"default",
+				"default_pattern_data"
+			],
+			[
+				"style",
+				"style_lookup"
+			],
+			[
+				"pattern_",
+				"pattern_obj"
+			],
+			[
+				"strin",
+				"stringify"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/shelagh/Web tutorials/authtest/djangoproject/djangoproject/settings.py",
+			"settings":
+			{
+				"buffer_size": 3966,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/shelagh/Web tutorials/authtest/djangoproject/api/urls.py",
+			"settings":
+			{
+				"buffer_size": 1238,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/shelagh/Web tutorials/authtest/venv36/lib/python3.6/site-packages/django_auth/templates/django_auth/user/register.html",
+			"settings":
+			{
+				"buffer_size": 3421,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/shelagh/Web tutorials/authtest/djangoproject/templates/password_reset_confirm.html",
+			"settings":
+			{
+				"buffer_size": 718,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/shelagh/Web tutorials/authtest2/djangoproject/djangoproject/urls.py",
+			"settings":
+			{
+				"buffer_size": 1931,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/shelagh/Web tutorials/authtest/djangoproject/api/templates/password_reset_confirm.html",
+			"settings":
+			{
+				"buffer_size": 724,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 784.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 958.0
+	},
+	"console":
+	{
+		"height": 391.0,
+		"history":
+		[
+			"/usr/local/bin/pylint --version",
+			"/usr/local/bin/python /usr/local/bin/pylint --version"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/shelagh/Web tutorials/authtest/djangoproject/templates/base1.html",
+		"/home/shelagh/Web tutorials/authtest/venv36/lib/python3.6/site-packages/allauth/templates/socialaccount/signup.html",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/templates/signup1.html",
+		"/home/shelagh/Web tutorials/authtest/venv36/lib/python3.6/site-packages/allauth/templates/account/signup.html",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/api/templates/fragments/signup_form.html",
+		"/home/shelagh/Web tutorials/authtest/venv36/lib/python3.6/site-packages/allauth/templates/account/signup_closed.html",
+		"/home/shelagh/Web tutorials/authtest2/djangoproject/templates/signup.html",
+		"/home/shelagh/django-rest-auth/demo/demo/settings.py",
+		"/home/shelagh/Web tutorials/authtest2/djangoproject/templates/fragments/password_reset_form.html",
+		"/home/shelagh/Web tutorials/authtest2/venv36/lib/python3.6/site-packages/allauth/account/forms.py",
+		"/home/shelagh/Web tutorials/authtest2/djangoproject/djangoproject/serializers.py",
+		"/home/shelagh/Web tutorials/authtest2/venv36/lib/python3.6/site-packages/rest_auth/views.py",
+		"/home/shelagh/Web tutorials/authtest2/venv36/lib/python3.6/site-packages/django/contrib/auth/forms.py",
+		"/home/shelagh/Web tutorials/authtest2/venv36/lib/python3.6/site-packages/rest_auth/serializers.py",
+		"/home/shelagh/Web tutorials/authtest2/djangoproject/djangoproject/settings.py",
+		"/home/shelagh/django-rest-auth/demo/demo/urls.py",
+		"/home/shelagh/Web tutorials/authtest2/djangoproject/templates/base.html",
+		"/home/shelagh/django-rest-auth/demo/demo/settings.pyc",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/djangoproject/settings.py",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/components/Login.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/is-empty.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/components/Register.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/actions/lists.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/reducers/authReducer.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/store.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/actions/authentication.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/setAuthToken.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/api/urls.py",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/reducers/errorReducer.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/components/Navbar.js",
+		"/home/shelagh/Meteor/twisted-threads/settings.json",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/components/Home.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/App.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/actions/types.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/reducers/index.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/db.sqlite3",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/package.json",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src/index.js",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/djangoproject/urls.py",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/users/admin.py",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/users/forms.py",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/users/urls.py",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/users/views.py",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/users/serializers.py",
+		"/home/shelagh/Web tutorials/authtest/djangoproject/users/models.py",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/package.json",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/actions/items.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/ListsList.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/MyTopTens.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/ItemsList.test.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/actions/items.test.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/MyTopTens.test.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/App.test.js",
+		"/home/shelagh/Web tutorials/django notes.txt",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/App.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/reducers/lists.test.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/reducers/index.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/reducers/lists.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/reducers/items.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/example_middleware.test.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/example_service.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/Header.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/example_middleware.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/sagas.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/sagas.test.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/reducers/page.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/ItemsPage.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/Item.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/index.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/constants/index.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/ItemsList.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/actions/index.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/App.scss",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/List.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/ListsPage.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/api/serializers.py",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/djangoproject/settings.py",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/api/api.py",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/api/endpoints.py",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/api/models.py",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/deploy/serverscript.sh",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/middleware/api.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/middleware/analytics.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/FlashMessage.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/middleware/logger.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/deployapp.sh",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/frontend/package.json",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/djangoproject/urls.py",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/components/NotFound.js",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src/index.css",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/eslintrcbak",
+		"/home/shelagh/Meteor/matchsquares/.eslintrc",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/.eslintrc",
+		"/home/shelagh/Web tutorials/mytoptens/djangoproject/frontend/package.json",
+		"/home/shelagh/Web tutorials/parsnip/djangoproject/.eslintrc",
+		"/home/shelagh/.eslintrc",
+		"/home/shelagh/Web tutorials/parsnip/.eslintrc",
+		"/home/shelagh/Web tutorials/mytoptens/djangoproject/frontend/src/index.js",
+		"/home/shelagh/Web tutorials/mytoptens/djangoproject/frontend/src/App.js",
+		"/home/shelagh/Web tutorials/mytoptens/djangoproject/frontend/src/App.scss",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/ponynote/production_settings.py",
+		"/home/shelagh/Web tutorials/alpha/project/frontend/src/App.scss",
+		"/home/shelagh/Web tutorials/alpha/project/frontend/src/App.js",
+		"/home/shelagh/Web tutorials/saowen2/djangothing/djangothing/settings.py",
+		"/home/shelagh/Web tutorials/saowen2/djangothing/frontend/config/paths.js",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/ponynote/settings.py",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/frontend/config/paths.js",
+		"/home/shelagh/Web tutorials/saowen2/djangothing/frontend/config/env.js",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/frontend/config/env.js",
+		"/home/shelagh/Web tutorials/saowen2/djangothing/templates/index.html",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/templates/index.html",
+		"/home/shelagh/Web tutorials/parsnip/parsnip/parsnip/urls.py",
+		"/home/shelagh/Web tutorials/parsnip/parsnip/templates/index.html",
+		"/home/shelagh/Web tutorials/ponynote3/ponynote/frontend/src/App.js",
+		"/home/shelagh/Web tutorials/ponynote.sublime-project",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/.pylintrc",
+		"/home/shelagh/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/shelagh/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/frontend/src/index.css",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/frontend/src/reducers/notes.js",
+		"/home/shelagh/Web tutorials/ponynote3/ponynote/frontend/src/reducers/notes.js",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/frontend/src/components/NotFound.jsx",
+		"/home/shelagh/Web tutorials/ponynote3/ponynote/ponynote/settings.py",
+		"/home/shelagh/Web tutorials/ponynote/ponynote/ponynote/urls.py",
+		"/home/shelagh/Web tutorials/ponynote/frontend/package.json",
+		"/home/shelagh/Web tutorials/ponynotepart3/ponynote/ponynote/frontend/src/actions/notes.js",
+		"/home/shelagh/Web tutorials/ponynote3/ponynote/frontend/src/actions/notes.js",
+		"/home/shelagh/Web tutorials/ponynote3/ponynote/frontend/src/components/PonyNote.jsx"
+	],
+	"find":
+	{
+		"height": 79.0
+	},
+	"find_in_files":
+	{
+		"height": 211.0,
+		"where_history":
+		[
+			"/home/shelagh/Web tutorials/authtest",
+			"/home/shelagh/Web tutorials/authtest/venv36/lib/python3.6/site-packages",
+			"/home/shelagh/Web tutorials/authtest/djangoproject/templates",
+			"/home/shelagh/Web tutorials/authtest2/venv36/lib/python3.6/site-packages",
+			"/home/shelagh/Web tutorials/authtest2/djangoproject/djangoproject",
+			"/home/shelagh/Web tutorials/authtest2/djangoproject/templates",
+			"/home/shelagh/Web tutorials/authtest2",
+			"/home/shelagh/Web tutorials/authtest/djangoproject/frontend/src",
+			"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src",
+			"/home/shelagh/Web tutorials/reduxbook/parsnip/ch8/src",
+			"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src",
+			"/home/shelagh/Web tutorials/parsnip/djangoproject",
+			"/home/shelagh/Web tutorials/parsnip/djangoproject/frontend/src"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"label for=\"password1\"",
+			"role=\"form\" action=\"/api/v1/rest-auth/registration/\"",
+			"Menu:",
+			"menu:",
+			"signup",
+			"repeat password",
+			"menu",
+			"has been reset",
+			"been reset",
+			"PasswordResetForm",
+			"settings",
+			"PasswordResetForm",
+			"password_reset_form_class",
+			"password_reset_form",
+			"PasswordResetForm",
+			"path",
+			"as_view",
+			"swagger",
+			"demo",
+			"',\n",
+			"swagger",
+			"url",
+			"email",
+			"logging",
+			"#",
+			"email",
+			"isempty",
+			"password_confirm",
+			"classnames",
+			"aut",
+			"normalizing data",
+			"fetch",
+			"setCurrentListId",
+			"currentListId",
+			"LIST_IS_PUBLIC_TEXTS",
+			"getLists",
+			"list",
+			"console",
+			"consol",
+			"conso",
+			"return state",
+			"action",
+			"board",
+			"list",
+			"List",
+			"list",
+			":\n",
+			"console.log",
+			"models.py",
+			"api_list",
+			"isPublic",
+			"onCreateList",
+			"CREATE_TASK",
+			"onCreateTask",
+			"ponynote",
+			"pony",
+			"plugins",
+			"plugin"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"/",
+			"password2",
+			"return updeep(state)",
+			"updeep(state)",
+			"item",
+			"Item",
+			"is_public",
+			"CREATE_LIST",
+			"onCreateList"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/shelagh/Web tutorials/authtest/djangoproject/djangoproject/settings.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3966,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1341,
+								1341
+							]
+						],
+						"settings":
+						{
+							"SL.72.region_keys":
+							[
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1596.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/shelagh/Web tutorials/authtest/djangoproject/api/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1238,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1057,
+								1057
+							]
+						],
+						"settings":
+						{
+							"SL.74.region_keys":
+							[
+								"sublime_linter.protected_regions",
+								"SL.pylint.Gutter.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|dot",
+								"SL.pylint.Highlights.|a6fe4400c0f5b55813e9df5fc4a56bf0ace0d1ee18003a546c0017a1501a0bf4|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.pylint.Highlights.|5884d0d1b4a8e95f81f858f211c28bb0f1afcf68d8fc86231f10b561ed79167d|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256",
+								"SL.pylint.Highlights.|bc83a354d4aa0ea6d67e9032910b390a6d4b2de9a5ce942f26c0b9aac5fa8ca1|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.pylint.Highlights.|bba8175ca411ed40ad56ebf2fc00e65506eeb308e3c5fc66d1078515c1ff6657|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256",
+								"SL.pylint.Highlights.|38e04e798e48591c3513f14c05c2d2d0e62c2535178373102df808bf297be574|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256",
+								"SL.pylint.Highlights.|472a1a689df2f5328c5521f380fc395fb3143af4113652bc42e6fca14997dc08|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256",
+								"SL.pylint.Highlights.|c232c891b507033c7c08cf748d853e2e936d062c9e9d37b065f1597a8114c9da|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.pylint.Highlights.|c0ab392c1d23a4ca247069794e9c73c3428eae704dcfc21dc9f35bb0ef8c8803|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.pylint.Highlights.|cca640ef3faebb4a9292de768a2699b789e4e89fc55b151e482869659b5e3a81|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256",
+								"SL.pylint.Gutter.|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|dot",
+								"SL.pylint.Highlights.|b3f6d9f6796fd5539d5f13b92540c699f2999a3a6f318ebea625c8d1d15d4a00|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256",
+								"SL.pylint.Highlights.|2a68f2671e09b6b732e19d97b700fce3d006d78232baf424f97339495c112643|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256"
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 114.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/shelagh/Web tutorials/authtest/venv36/lib/python3.6/site-packages/django_auth/templates/django_auth/user/register.html",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3421,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 570.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/shelagh/Web tutorials/authtest/djangoproject/templates/password_reset_confirm.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 718,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								379,
+								379
+							]
+						],
+						"settings":
+						{
+							"SL.75.region_keys":
+							[
+								"SL.eslint.Highlights.|642846156ac0fc165da148eb8f23b9f8659066f3b9b1a7e0ce1f9fe1375a2992|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|7910c5865b2564f0b113c3d03b88b2d885586d55870bda96a2df5c658294b6dd|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|d0810cdf23c02b6a26fc3d8f8de9f812bd3e215605f3e54cfff5a9592d31aea0|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|523de3583a0b008ebd188c2eda85a52639b3189b07874d4b5d221c9e812a5bbe|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|5ac00d9a1a7e953a44b48a271206c1cacf51a24986d2d33b44457569a6dfda05|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|fbd068c745ac1530b1188ba252f27683a7e3d27b52316c9e5d2e11fb0806421e|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|edf11c865c8912d3bd2f5d2b6629cea6eabf9fb72d7f69d5e893bef06c69360c|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|96006114adb1680dfbf222da34fbbfef33ecc62604fcd2f53ba15befb6976901|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|4de93cd15ec1a3749f63bc29c9cb62bc1cedea2b381729e16befeaf313b0a132|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|b6072573664995bc32bd58362101b01c8e2003f04484488380a1f2a6174f7af5|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256",
+								"sublime_linter.protected_regions",
+								"SL.eslint.Highlights.|276dbc3733175ed6e72b5ccc32cd8e6d19b30631e67486bcc9100d3040d4d011|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|675833385d5bcf250ffb3710e20d66719de908a84c10b4649beb8d63d66b6678|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|d862844f3691764067a9c0bf813dd79bdadb29ac24c5ee3d943d647b4ac73681|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|48a9945da2f831107bd3345a351d01a67ddf59e542a0064b5bd9a0f75486e4de|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Gutter.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|dot",
+								"SL.eslint.Highlights.|a26a676b815e7753a943ef9b6e1ca5108f79a2929669536add2250ed772c8878|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|a0fbcadb8c8738ed91632d29989b379e0e7ddef7e9665207f0c6d4671449bd47|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|3fdec012e5f15ae480f5dda873df744c08301aebdb46e8f94c54e3919e153dc6|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|d9bb25c4bc1e3da1218cda75b375aa4e082dcb13a80a8b2bdb9c1d8e750756ac|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|37dd1f23b2bc0bd120e2113588098f9349238e308955137be337d4f941f39327|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|1a771557b5bc7dce40efc2e7fe0eb59e4a2826006d499be1cd5333c60e4185e5|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|02480f6e6a6b452444ca1e5e8a955bfc9c46d7579d630c343c232b2dced422ab|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|26d61bcfed4d05fd68063663966039454af672db0bce86fc3be397db5a1627c8|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256"
+							],
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "/home/shelagh/Web tutorials/authtest2/djangoproject/djangoproject/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1931,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1429,
+								1429
+							]
+						],
+						"settings":
+						{
+							"SL.50.region_keys":
+							[
+								"sublime_linter.protected_regions",
+								"SL.pylint.Gutter.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|dot",
+								"SL.pylint.Highlights.|8991f5c38e1aefb7ce8a4587eefac4646f6764334d6e6555afd202c42ef7ccac|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256",
+								"SL.pylint.Gutter.|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|dot",
+								"SL.pylint.Highlights.|4f886a0d96db044fd8c7fec9d0404faddbde2d7eef0ab2c4859ea783ca910772|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.pylint.Highlights.|33bed3cb000194cb53f57befa7174881061f0745b993b808bafa101614231e6b|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.pylint.Highlights.|09500af4c689f8dbda918425c8fc3b5a6461c3a7a3cf303d8ad4ccc804d27238|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256",
+								"SL.pylint.Highlights.|97c3420d7053cb5dd7a856cc86b505eaade9af3aa5fadf92167cd3804c4d3837|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.pylint.Highlights.|fd1bafab8f41e840aa82b05c914eb9729332b9fabe0f817db4f01a4f406441d7|region.yellowish markup.changed.sublime_linter markup.warning.sublime_linter|256"
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 646.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/shelagh/Web tutorials/authtest/djangoproject/api/templates/password_reset_confirm.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 724,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"SL.93.region_keys":
+							[
+								"SL.eslint.Highlights.|3415c5092ab5c767b779440f9c198202f5e9603f073a98f5ab23b9ca384f8962|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|0456016d3cd85689c9874115b8acfd03c817d120d594fac9a0d9abc853eea992|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|9323d75693d22479fa2995c6b474c899ed03d68f5dec64bfd96ed2c2524f0e1a|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|23d06d603d8dc5eb85a86dc5e12e30e6a2fc9594dbc9a98ef9f7a683de9a8cbe|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|d9663c51d59b1e5d28908a1a40971a8a10a6baf8cb0012d0233326194da5500d|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|c264a90b49beaaf8b02aa027a9c3dd5a31165348f0b7b1eb0ecf5048b6da5206|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|9dc21962e05f2a06c0f22069ab6a556663015f1440c72c5c7fa653584602d630|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|161db76a508d684a7dd817b30e53472c82c00e002808db243b1a7af2de49e671|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|582aa291c7447522bb07680eddda7a9cb0e4b0fc45f3f10ce352e9266f443559|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|bab96e7f3dee38a04266a0d7edf42a2739a5f667ea5e0d7ecab199344c3d4bdd|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|ad8ed5f93d3b786c0767cf3cae62094ff08b583381e63dd853bc90ac62c1ed98|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|54453e344473b1a522d5af0e416543cfcf260dc54d37b3f1cdf7d06232c656ce|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|3894510244d570e0d1532ae8a45fefd8524615961e57d788562047d102dd4652|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"sublime_linter.protected_regions",
+								"SL.eslint.Highlights.|14591f818efa207b225c45cd14d1ebc6e2251c2cc61ed8592a552c1b5646e392|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|ef6b1e526b253d6f8bd2908233a2d03aba244463b1187931e987adcebff607e5|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|b54b19da0879cdf2a596cba46c7cb924753f0fd5bee009f268f7c284373ceaa0|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|b399d1a0f1c86a42e9df87aa1bfe7ae11b0f570e7b291690bd3e1bfd93596802|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Gutter.|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|dot",
+								"SL.eslint.Highlights.|16346835f8a8d9d09af4ab447be072d043945b8b8dc09120dbca540679c24f8c|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|97e577f2b21b8a53e59b68f1d30f8e8f0985cca6c0cbaf29d341f070755b6b3f|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|373cb362d6de66da24e76c4031056a4b1a0a2240289131ed5ca1483afdaa92ec|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|51df8fcef5108ed9f582fffb601e062eb290e5da4bfb0738121fa70e09e7257f|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|a68a417556415db2cb516565223f15601e978cef57b1b272d1d4e3447989f37b|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256",
+								"SL.eslint.Highlights.|8f2bfb9c2a0ba17ff936eda87cc780ca2029e79fe8b90eae5254da69c61bafd7|region.redish markup.deleted.sublime_linter markup.error.sublime_linter|256"
+							],
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 55.0
+	},
+	"input":
+	{
+		"height": 79.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 274.0
+	},
+	"output.find_results":
+	{
+		"height": 317.0
+	},
+	"pinned_build_system": "",
+	"project": "authtest2.sublime-project",
+	"replace":
+	{
+		"height": 102.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 1000.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Web tutorials/parsnip.sublime-project"
+			]
+		],
+		"width": 760.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 472.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/authentication';
 import classnames from 'classnames';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
 
@@ -51,15 +52,6 @@ class Login extends Component {
         this.props.loginUser(user);
     }
 
-    componentWillReceiveProps(nextProps) {
-
-        if(nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
-        }
-    }
-
     render() {
         const {errors} = this.state;
         return(
@@ -98,6 +90,7 @@ class Login extends Component {
                     </button>
                 </div>
             </form>
+            <Link className="nav-link" to="/forgotpassword">Forgot password?</Link>
         </div>
         )
     }
