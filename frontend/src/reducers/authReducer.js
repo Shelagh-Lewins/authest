@@ -37,7 +37,6 @@ export default function(state = initialState, action ) {
 			}
 
 		case RESET_PASSWORD_COMPLETE:
-		console.log('RESET_PASSWORD_COMPLETE ', action.payload);
 			return {
 				...state,
 				resetPasswordComplete: true

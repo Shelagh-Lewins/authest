@@ -89,12 +89,14 @@ class Login extends Component {
                         Login User
                     </button>
                 </div>
+                {errors.authentication && (<div className="invalid-feedback" style={{display: 'block'}}>{errors.authentication}</div>)}
             </form>
             <Link className="nav-link" to="/forgotpassword">Forgot password?</Link>
         </div>
         )
     }
 }
+// TODO fix up validation
 
 Login.propTypes = {
     loginUser: PropTypes.func.isRequired,

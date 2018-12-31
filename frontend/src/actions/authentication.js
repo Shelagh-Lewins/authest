@@ -8,7 +8,7 @@ import {
 	FORGOT_PASSWORD_EMAIL_SENT,
 	RESET_PASSWORD_COMPLETE
 } from './types';
-import $ from 'jquery'; 
+import $ from 'jquery';
 
 export const registerUser = (user, history) => dispatch => {
 	var formData  = new FormData();
@@ -42,23 +42,31 @@ export const loginUser = (user) => dispatch => {
 
 	return fetch('/api/v1/rest-auth/login/', { 'method': 'POST', 'body': formData })
 		.then(res => {
-			return res.json();
+			console.log('res ', res);
+			if(res.ok) {
+				return res.json();
+			} else {
+				dispatch({
+					type: GET_ERRORS,
+					payload: { 'authentication': 'Unable to log in with the provided credentials, please try again.' }
+				});
+			}
 		})
 		.then(token => {
+			console.log('token ', token);
+
+			if(!token) {
+				return;
+			}
 			// token is an object { key: value }
 			// localStorage can only store a string so we'll use just the value everywhere for consistency
 			localStorage.setItem('jwtToken', token.key);
       setAuthToken(token.key);
-      //const decoded = jwt_decode(token);
-      return dispatch(setCurrentUser(token.key));
+      dispatch(getUserInfo());
+      return dispatch(setCurrentUser({
+      	'key': token.key,
+      }));
 		})
-		.catch(err => {
-			console.log('error ', err.message);
-			dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data
-			});
-		});
 }
 
 export const setCurrentUser = token => {
@@ -73,6 +81,16 @@ export const logoutUser = (history) => dispatch => {
     setAuthToken(false);
     dispatch(setCurrentUser({}));
     history.push('/login');
+}
+// TODO parameterise api path
+///////////////////////////////
+// get user info
+// TODO add auth credentials
+export const getUserInfo = () => dispatch => {
+	return fetch('/api/v1/rest-auth/user/', { 'method': 'POST' })
+	.then(res => {
+		console.log('user: ', res);
+	})
 }
 
 ///////////////////////////////
@@ -121,6 +139,9 @@ export const resetPasswordComplete = (token) => {
   }
 }
 
+// This function does not yet work. There is something wrong with the fetch request, perhaps the csrf tokens which I don't know how to generate correctly. The code here and in the ResetPassword component should be fixed or removed at some point.
+// For now, a Django template is used for entering the new password at http://localhost:8000/api/v1/reset/Mw/52l-11fe5a58b91d894386e8/
+
 // https://www.techiediaries.com/django-react-forms-csrf-axios/
 function getCookie(name) {
     var cookieValue = null;
@@ -139,24 +160,17 @@ function getCookie(name) {
 
 export const resetPassword = (data) => dispatch => {
 	console.log('resetPassword action creator. data ', data);
-// why is there an error if I rename 'email' to 'data'?
-	//var formData  = new FormData();
 
 	var body = '';
 	var csrftoken = getCookie('csrftoken');
 
-  //for(var name in data) {
-		//formData.append(name, email[name]);
 		body += `csrfmiddlewaretoken=${csrftoken}&`;
 		body += `new_password1=${data.password}&`;
 		body += `new_password2=${data.password_confirm}`;
-  //}
 
   console.log('token ', data.csrfmiddlewaretoken);
   console.log('body ', body);
   console.log('data.uid ', data.uid);
-
-  // const body = `csrfmiddlewaretoken=${csrftoken}&new_password1=${email.password}&new_password2=${email.password_confirm}`;
 
   return fetch(`/api/v1/reset1/${data.uid}/set-password/`,
   	{ credentials: 'include', 'method': 'POST', mode: 'same-origin',
