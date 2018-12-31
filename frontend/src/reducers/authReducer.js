@@ -1,11 +1,17 @@
 // authReducer.js
 
-import { SET_CURRENT_USER, FORGOT_PASSWORD_EMAIL_NOT_SENT, FORGOT_PASSWORD_EMAIL_SENT } from '../actions/types';
+import {
+	SET_CURRENT_USER,
+	FORGOT_PASSWORD_EMAIL_NOT_SENT,
+	FORGOT_PASSWORD_EMAIL_SENT,
+	RESET_PASSWORD_COMPLETE
+} from '../actions/types';
 import isEmpty from '../is-empty';
 
 const initialState = {
 	isAuthenticated: false,
 	forgotPasswordEmailSent: false,
+	resetPasswordComplete: false,
 	user: {}
 }
 
@@ -28,6 +34,13 @@ export default function(state = initialState, action ) {
 			return {
 				...state,
 				forgotPasswordEmailSent: true
+			}
+
+		case RESET_PASSWORD_COMPLETE:
+		console.log('RESET_PASSWORD_COMPLETE ', action.payload);
+			return {
+				...state,
+				resetPasswordComplete: true
 			}
 
 		default: 
