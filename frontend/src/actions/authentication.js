@@ -137,27 +137,34 @@ function getCookie(name) {
     return cookieValue;
 }
 
-export const resetPassword = (email) => dispatch => {
-	console.log('resetPassword action creator. data ', email);
+export const resetPassword = (data) => dispatch => {
+	console.log('resetPassword action creator. data ', data);
 // why is there an error if I rename 'email' to 'data'?
-	var formData  = new FormData();
+	//var formData  = new FormData();
 
-  for(var name in email) {
-		formData.append(name, email[name]);
-  }
+	var body = '';
+	var csrftoken = getCookie('csrftoken');
 
-  var csrftoken = getCookie('csrftoken');
-  console.log('token ', csrftoken);
+  //for(var name in data) {
+		//formData.append(name, email[name]);
+		body += `csrfmiddlewaretoken=${csrftoken}&`;
+		body += `new_password1=${data.password}&`;
+		body += `new_password2=${data.password_confirm}`;
+  //}
 
-  const data = `csrfmiddlewaretoken=${csrftoken}&new_password1=${email.password}&new_password2=${email.password_confirm}`;
+  console.log('token ', data.csrfmiddlewaretoken);
+  console.log('body ', body);
+  console.log('data.uid ', data.uid);
 
-  return fetch(`/api/v1/reset/${data.uid}/set-password/`,
+  // const body = `csrfmiddlewaretoken=${csrftoken}&new_password1=${email.password}&new_password2=${email.password_confirm}`;
+
+  return fetch(`/api/v1/reset1/${data.uid}/set-password/`,
   	{ credentials: 'include', 'method': 'POST', mode: 'same-origin',
     headers: {
     	'Accept': 'text/html,application/xhtml+xml,application/xml',
     	'Content-Type': 'application/x-www-form-urlencoded',
       'X-CSRFToken': csrftoken
-    }, 'body': data })
+    }, 'body': body })
 		.then(res => {
 			return res.json();
 		})

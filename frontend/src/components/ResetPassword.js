@@ -50,7 +50,7 @@ class ResetPassword extends Component {
 		e.preventDefault();
 		const user = {
 			uid: this.props.match.params.uid,
-			token: this.props.match.params.token,
+			csrfmiddlewaretoken: this.props.match.params.token,
 			password: this.state.password,
       password_confirm: this.state.password_confirm
 		}
@@ -107,7 +107,7 @@ class ResetPassword extends Component {
           {errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
 	      </div>
 				<div className="form-group">
-				<input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />
+					<input type="hidden" name="csrfmiddlewaretoken" value={csrftoken} />
 					<button type="submit" className="btn btn-primary">
 							Set new password
 					</button>
