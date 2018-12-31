@@ -139,7 +139,7 @@ function getCookie(name) {
 
 export const resetPassword = (email) => dispatch => {
 	console.log('resetPassword action creator. data ', email);
-
+// why is there an error if I rename 'email' to 'data'?
 	var formData  = new FormData();
 
   for(var name in email) {
@@ -149,7 +149,7 @@ export const resetPassword = (email) => dispatch => {
   var csrftoken = getCookie('csrftoken');
   console.log('token ', csrftoken);
 
-  const data = `${csrftoken}&new_password1=${email.password}&new_password2=${email.password_confirm}`;
+  const data = `csrfmiddlewaretoken=${csrftoken}&new_password1=${email.password}&new_password2=${email.password_confirm}`;
 
   return fetch(`/api/v1/reset/${data.uid}/set-password/`,
   	{ credentials: 'include', 'method': 'POST', mode: 'same-origin',
