@@ -13,7 +13,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "updeep": "^1.1.0"
   },
   "scripts": {
     "start": "BROWSER=none react-scripts start",
@@ -22,8 +23,57 @@
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:8000",
-  "eslintConfig": {
-    "extends": "react-app"
+    "eslintConfig": {
+    "extends": [
+      "react-app"
+    ],
+    "rules": {
+      "eol-last": [
+        "error",
+        "always"
+      ],
+      "quotes": [
+        2,
+        "single",
+        {
+          "avoidEscape": true,
+          "allowTemplateLiterals": true
+        }
+      ],
+      "padded-blocks": [
+        "error",
+        "never"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "indent": [
+        "error",
+        "tab",
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "key-spacing": [
+        "error",
+        {
+          "mode": "strict"
+        }
+      ],
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "quote-props": [
+        2,
+        "always"
+      ]
+    },
+    "env": {
+      "browser": true,
+      "node": true
+    }
   },
   "browserslist": [
     ">0.2%",

@@ -28,6 +28,7 @@ class Navbar extends Component {
 
 	render() {
 		const {isAuthenticated, user} = this.props.auth;
+
 		const authLinks = (
 			<ul className="navbar-nav ml-auto">
 				<a href="/" className="nav-link" onClick={this.onLogout.bind(this)}>
@@ -52,10 +53,11 @@ class Navbar extends Component {
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
 				<Link className="navbar-brand" to="/">Redux Node Auth</Link>
 				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-					onClick={(e) => {this.showDropdown(e)}} >
+					onClick={(e) => {this.showDropdown(e);}} >
 		  		<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className={`collapse navbar-collapse ${this.state.showDropdown ? 'show' : ''}`} id="navbarSupportedContent">
+					{isAuthenticated && <span>{user.username}</span>}
 					{isAuthenticated ? authLinks : guestLinks}
 					<form className="form-inline my-2 my-lg-0">
 						<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
@@ -64,16 +66,16 @@ class Navbar extends Component {
 				</div>
 				
 			</nav>
-		)
+		);
 	}
 }
 Navbar.propTypes = {
-	logoutUser: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired
-}
+	'logoutUser': PropTypes.func.isRequired,
+	'auth': PropTypes.object.isRequired
+};
 
 const mapStateToProps = (state) => ({
-	auth: state.auth
-})
+	'auth': state.auth
+});
 
 export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar));
