@@ -12,6 +12,7 @@
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
+    "reactstrap": "^7.0.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "updeep": "^1.1.0"
@@ -23,7 +24,7 @@
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:8000",
-    "eslintConfig": {
+  "eslintConfig": {
     "extends": [
       "react-app"
     ],
