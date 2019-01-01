@@ -25,10 +25,10 @@ export default function(state = initialState, action ) {
 		case SET_CURRENT_USER:
 			return updeep({
 				'isAuthenticated': !isEmpty(action.payload.token),
-				'user': updeep.constant({ 'token': action.payload.token }) // remove all other values, this is a new user
+				'user': updeep.constant({ 'token': action.payload.token }) // remove user profile
 			}, state);
 
-		case SET_USER_INFO: // merge with existing user to preserve token, isAuthenticted
+		case SET_USER_INFO: // update user profile
 			return updeep({
 				'user': {
 					'username': action.payload.username,
@@ -39,7 +39,7 @@ export default function(state = initialState, action ) {
 		case LOGOUT_USER_COMPLETE: {
 			return updeep({
 				'isAuthenticated': false,
-				'user': updeep.constant({}) // remove all other values
+				'user': updeep.constant({}) // remove user profile
 			}, state);
 		}
 
@@ -49,10 +49,6 @@ export default function(state = initialState, action ) {
 				'resetPasswordComplete': false,
 			}, state);
 		}
-		/* return {
-				...state,
-				'forgotPasswordEmailSent': false
-			}; */
 
 		case FORGOT_PASSWORD_EMAIL_SENT :{
 			return updeep({
@@ -60,10 +56,6 @@ export default function(state = initialState, action ) {
 				'resetPasswordComplete': false,
 			}, state);
 		}
-		/* return {
-				...state,
-				'forgotPasswordEmailSent': true
-			}; */
 
 		case RESET_PASSWORD_COMPLETE: {
 			return updeep({
@@ -71,10 +63,6 @@ export default function(state = initialState, action ) {
 				'resetPasswordComplete': true,
 			}, state);
 		}
-		/* return {
-				...state,
-				'resetPasswordComplete': true
-			}; */
 
 		default: 
 			return state;
