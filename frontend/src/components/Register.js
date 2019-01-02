@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../actions/authentication';
-import classnames from 'classnames';
+
+import ValidatedForm from './ValidatedForm';
 
 class Register extends Component {
 	constructor() {
@@ -36,7 +37,7 @@ class Register extends Component {
 			'password1': this.state.password,
 			'password2': this.state.password_confirm
 		};
-		console.log('register: ', user);
+
 		this.props.registerUser(user, this.props.history);
 	}
 
@@ -57,11 +58,64 @@ class Register extends Component {
 		}
 	}
 
+	///////////////
+	submit = () => {
+		console.log('form submitted');
+	}
+
+	///////////////
+
 	render() {
 		const { errors } = this.state;
 
 		return(
 			<Container>
+				<ValidatedForm onSubmit={ this.submit }>
+	        <div className={'form-group'}>
+	          <label
+	            htmlFor={'email'}
+	            >
+	            Email
+	          </label>
+	          <input
+	            id={'email'}
+	            className={'form-control'}
+	            required={true}
+	            name={'email'}
+	            type={'email'}
+	            />
+	          <div className='invalid-feedback' />
+	        </div>
+	        <div className={'form-group'}>
+	          <label
+	            htmlFor={'password'}
+	            >
+	            Password
+	          </label>
+	          <input
+	            id={'password'}
+	            className={'form-control'}
+	            required={true}
+	            name={'password'}
+	            type={'password'}
+	            minLength={6}
+	            pattern='(?=.*\d)(?=.*[a-z]).{6,}'
+	            />
+	          <small className='form-text text-muted'>Must be at least 6 characters long, contain letters and numbers</small>
+	          <div className='invalid-feedback' />
+	        </div>
+	        <div className={'row justify-content-md-center'}>
+	          <div className={'col-sm-12'}>
+	            <button
+	              type={'submit'}
+	              className={'btn btn-primary mb-2'}
+	              >
+	              Test submit!
+	            </button>
+	          </div>
+	        </div>
+	      </ValidatedForm>
+
 				<h2>Create an account</h2>
 				<Form onSubmit={this.handleSubmit}>
 					<Row>
