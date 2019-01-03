@@ -1,13 +1,14 @@
 // Register.js
 
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, Label, Input } from 'reactstrap';
+import { Container, Row, Col, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../actions/authentication';
 
 import ValidatedForm from './ValidatedForm';
+import ReactDOM from 'react-dom';
 
 class Register extends Component {
 	constructor() {
@@ -21,6 +22,7 @@ class Register extends Component {
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.setPasswordConfirmValidity = this.setPasswordConfirmValidity.bind(this);
 	}
 
 	handleInputChange(e) {
@@ -59,8 +61,25 @@ class Register extends Component {
 	}
 
 	///////////////
-	submit = () => {
+	/* submit = () => {
 		console.log('form submitted');
+	} */
+
+	setPasswordConfirmValidity(e) {
+		// this.handleInputChange(e);
+
+		const node = ReactDOM.findDOMNode(this);
+
+		if (node instanceof HTMLElement) {
+	    const password = node.querySelector('#password');
+	    const password_confirm = node.querySelector('#password_confirm');
+
+	    if (password.value === password_confirm.value) {
+	    	 password_confirm.setCustomValidity('');
+	    } else {
+	    	password_confirm.setCustomValidity('Passwords must match');
+	    }
+		}
 	}
 
 	///////////////
@@ -70,54 +89,8 @@ class Register extends Component {
 
 		return(
 			<Container>
-				<ValidatedForm onSubmit={ this.submit }>
-	        <div className={'form-group'}>
-	          <label
-	            htmlFor={'email'}
-	            >
-	            Email
-	          </label>
-	          <input
-	            id={'email'}
-	            className={'form-control'}
-	            required={true}
-	            name={'email'}
-	            type={'email'}
-	            />
-	          <div className='invalid-feedback' />
-	        </div>
-	        <div className={'form-group'}>
-	          <label
-	            htmlFor={'password'}
-	            >
-	            Password
-	          </label>
-	          <input
-	            id={'password'}
-	            className={'form-control'}
-	            required={true}
-	            name={'password'}
-	            type={'password'}
-	            minLength={6}
-	            pattern='(?=.*\d)(?=.*[a-z]).{6,}'
-	            />
-	          <small className='form-text text-muted'>Must be at least 6 characters long, contain letters and numbers</small>
-	          <div className='invalid-feedback' />
-	        </div>
-	        <div className={'row justify-content-md-center'}>
-	          <div className={'col-sm-12'}>
-	            <button
-	              type={'submit'}
-	              className={'btn btn-primary mb-2'}
-	              >
-	              Test submit!
-	            </button>
-	          </div>
-	        </div>
-	      </ValidatedForm>
-
 				<h2>Create an account</h2>
-				<Form onSubmit={this.handleSubmit}>
+				<ValidatedForm onSubmit={ this.handleSubmit }>
 					<Row>
 						<Col>
 							<div className="form-group">
@@ -126,10 +99,12 @@ class Register extends Component {
 									type="text"
 									name="username"
 									id="username"
+									required={true}
 									onChange={ this.handleInputChange }
 									value={ this.state.username }
 									placeholder="Username"
 								/>
+								<div className='invalid-feedback' />
 							</div>
 						</Col>
 					</Row>
@@ -140,14 +115,27 @@ class Register extends Component {
 								<Input
 									type="email"
 									name="email"
+									required={true}
 									id="email"
 									onChange={ this.handleInputChange }
 									value={ this.state.email }
 									placeholder="Email address"
 								/>
+								<div className='invalid-feedback' />
 							</div>
 						</Col>
 					</Row>
+							<div className="form-group">
+								<Label for="password">Test thing</Label>
+								<Input
+									type="text"
+									name="test"
+									pattern="^(?=.*\d)(?=.*[a-zA-Z]).+$"
+									id="test"
+									placeholder="test"
+								/>
+								<div className='invalid-feedback' />
+							</div>
 					<Row>
 						<Col>
 							<div className="form-group">
@@ -155,11 +143,16 @@ class Register extends Component {
 								<Input
 									type="password"
 									name="password"
+									required={true}
+									minLength={6}
+									pattern="^(?!^\d+$)^.+$"
 									id="password"
-									onChange={ this.handleInputChange }
 									value={ this.state.password }
 									placeholder="Password"
+									onChange={ this.handleInputChange }
+									onInput= { this.setPasswordConfirmValidity }
 								/>
+								<div className='invalid-feedback' />
 							</div>
 						</Col>
 					</Row>
@@ -171,10 +164,16 @@ class Register extends Component {
 									type="password"
 									name="password_confirm"
 									id="password_confirm"
-									onChange={ this.handleInputChange }
+									required={true}
+									pattern='(?!^\d+$)^.+$.{8,}'
+									minLength={8}
 									value={ this.state.password_confirm }
-									placeholder="Password"
+									placeholder="Confirm password"
+									onChange={ this.handleInputChange }
+									onInput= { this.setPasswordConfirmValidity }
 								/>
+								<small className='form-text text-muted'>Must be at least 6 characters long, contain letters and numbers</small>
+								<div className='invalid-feedback' />
 							</div>
 						</Col>
 					</Row>
@@ -185,12 +184,12 @@ class Register extends Component {
 							</button>
 						</Col>
 					</Row>
-					<Row>
+	        <Row>
 						<Col>
 							{errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
 						</Col>
 					</Row>
-				</Form>
+	      </ValidatedForm>
 			</Container>
 		);
 	}
