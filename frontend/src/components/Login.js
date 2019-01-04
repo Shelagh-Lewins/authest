@@ -4,16 +4,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/authentication';
-import classnames from 'classnames';
+import { Container, Row, Col, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import ValidatedForm from './ValidatedForm.js';
 
 class Login extends Component {
 	constructor() {
 		super();
 		this.state = {
 			'username': '',
-			'password': '',
-			'errors': {}
+			'password': ''
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,46 +52,60 @@ class Login extends Component {
 	}
 
 	render() {
-		const { errors } = this.state;
+		const { errors } = this.props;
 		return(
-			<div className="container" style={{ 'marginTop': '50px', 'width': '700px' }}>
-				<h2 style={ { 'marginBottom': '40px' } }>Login</h2>
-				<form onSubmit={ this.handleSubmit }>
-					<div className="form-group">
-						<input
-							type="username"
-							placeholder="Username"
-							className={classnames('form-control form-control-lg', {
-								'is-invalid': errors.username
-							})}
-							name="username"
-							onChange={ this.handleInputChange }
-							value={ this.state.username }
-						/>
-						{errors.username && (<div className="invalid-feedback">{errors.username}</div>)}
-					</div>
-					<div className="form-group">
-						<input
-							type="password"
-							placeholder="Password"
-							className={classnames('form-control form-control-lg', {
-								'is-invalid': errors.password
-							})} 
-							name="password"
-							onChange={ this.handleInputChange }
-							value={ this.state.password }
-						/>
-						{errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
-					</div>
-					<div className="form-group">
-						<button type="submit" className="btn btn-primary">
-							Login User
-						</button>
-					</div>
-					{errors.authentication && (<div className="invalid-feedback" style={ { 'display': 'block' } }>{errors.authentication}</div>)}
-				</form>
+			<Container>
+				<h2>Login</h2>
+				<ValidatedForm onSubmit={ this.handleSubmit }>
+					<Row>
+						<Col>
+							<div className="form-group">
+								<Label for="username">Username</Label>
+								<Input
+									type="text"
+									name="username"
+									id="username"
+									required={true}
+									onChange={ this.handleInputChange }
+									value={ this.state.username }
+									placeholder="Username"
+								/>
+								<div className='invalid-feedback' />
+							</div>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							<div className="form-group">
+								<Label for="password">Password</Label>
+								<Input
+									type="password"
+									name="password"
+									required={true}
+									id="password"
+									value={ this.state.password }
+									placeholder="Password"
+									onChange={ this.handleInputChange }
+								/>
+								<div className='invalid-feedback' />
+							</div>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							<button type="submit" className="btn btn-primary">
+								Login
+							</button>
+						</Col>
+					</Row>
+	        <Row>
+						<Col>
+							{errors.authentication && <div className="form-feedback " style={{ 'display': 'block' }}><ul>{errors.authentication}</ul></div>}
+						</Col>
+					</Row>
+				</ValidatedForm>
 				<Link className="nav-link" to="/forgotpassword">Forgot password?</Link>
-			</div>
+			</Container>
 		);
 	}
 }

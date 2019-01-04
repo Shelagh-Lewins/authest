@@ -1,11 +1,11 @@
 // Register.js
 
 import React, { Component } from 'react';
-import { Container, Row, Col, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../actions/authentication';
+import { Container, Row, Col, Label, Input } from 'reactstrap';
 import ValidatedForm from './ValidatedForm.js';
 
 class Register extends Component {
@@ -60,7 +60,7 @@ class Register extends Component {
 
 	render() {
 		// there may be more than one error, e.g. username and email already in use
-		const errors = this.props.errors;
+		const { errors } = this.props;
 		let errorTexts = [];
 
 		if (errors.registration) {
@@ -190,7 +190,8 @@ class Register extends Component {
 
 Register.propTypes = {
 	'registerUser': PropTypes.func.isRequired,
-	'auth': PropTypes.object.isRequired
+	'auth': PropTypes.object.isRequired,
+	'errors': PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
