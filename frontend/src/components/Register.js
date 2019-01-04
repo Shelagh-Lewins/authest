@@ -86,7 +86,18 @@ class Register extends Component {
 
 	render() {
 		const { errors } = this.state;
+		/* password requirements for django.auth are
+		https://docs.djangoproject.com/en/2.1/topics/auth/passwords/
 
+		UserAttributeSimilarityValidator, which checks the similarity between the password and a set of attributes of the user.
+
+		MinimumLengthValidator, which simply checks whether the password meets a minimum length, default 8.
+
+		CommonPasswordValidator, which checks whether the password occurs in a list of common passwords. By default, it compares to an included list of 20,000 common passwords.
+
+		NumericPasswordValidator, which checks whether the password isn’t entirely numeric.
+
+	*/
 		return(
 			<Container>
 				<h2>Create an account</h2>
@@ -125,17 +136,6 @@ class Register extends Component {
 							</div>
 						</Col>
 					</Row>
-							<div className="form-group">
-								<Label for="password">Test thing</Label>
-								<Input
-									type="text"
-									name="test"
-									pattern="^(?=.*\d)(?=.*[a-zA-Z]).+$"
-									id="test"
-									placeholder="test"
-								/>
-								<div className='invalid-feedback' />
-							</div>
 					<Row>
 						<Col>
 							<div className="form-group">
@@ -144,7 +144,7 @@ class Register extends Component {
 									type="password"
 									name="password"
 									required={true}
-									minLength={6}
+									minLength={8}
 									pattern="^(?!^\d+$)^.+$"
 									id="password"
 									value={ this.state.password }
@@ -172,8 +172,13 @@ class Register extends Component {
 									onChange={ this.handleInputChange }
 									onInput= { this.setPasswordConfirmValidity }
 								/>
-								<small className='form-text text-muted'>Must be at least 6 characters long, contain letters and numbers</small>
 								<div className='invalid-feedback' />
+								<small className='form-text text-muted'><ul>
+									<li>Your password can't be too similar to your other personal information.</li>
+									<li>Your password must contain at least 8 characters.</li>
+									<li>Your password can't be a commonly used password.</li>
+									<li>Your password can't be entirely numbers.</li>
+								</ul></small>
 							</div>
 						</Col>
 					</Row>

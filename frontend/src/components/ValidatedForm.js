@@ -32,18 +32,20 @@ export default class ValidatedForm extends Component {
 	};
 
 	customMessages = {
-	  'valueMissing': 'Custom required!', // `required` attr
+		// uncomment a message to use it in place of the HTML5 default
+	  // 'valueMissing': 'Custom required!', // `required` attr
 	  // 'emailMismatch': 'Custom email mismatch', // Invalid email
 	  // 'patternMismatch': 'Custom pattern mismatch',// `pattern` attr
 	}
 
 	// https://pageclip.co/blog/2018-02-20-you-should-use-html5-form-validation.html
 	getCustomMessage = (elem)  => {
-		// is there a custom validity type set, e.g. to ensure two passwords match?
+		// check for a custom validity type, e.g. to ensure two passwords match
 		if (elem.validity.customError) {
 			return elem.validationMessage;
 		}
 
+	  // check for a specific type mismatch e.g. emailMismatch
 	  if (elem.validity.typeMismatch) {
 	    return  this.customMessages[`${elem.type}Mismatch`];
 	  } else {
@@ -60,9 +62,7 @@ export default class ValidatedForm extends Component {
 	 * @returns bool Returns a boolean showing if the form is valid for submission or not.
 	 **/
 	validate = () => {
-		//this.formEl is a reference in the component to the form DOM element.
-		//const formEl = this.formEl;
-		const formEl = ReactDOM.findDOMNode(this);
+		const formEl = ReactDOM.findDOMNode(this); // component parent node
 		const formLength = formEl.length;
 
 		/*
@@ -75,8 +75,7 @@ export default class ValidatedForm extends Component {
 			for (let i = 0; i < formLength; i++) {
 				//the i-th child of the form corresponds to the form's i-th input element
 				const elem = formEl[i];
-				console.log('elem ', elem);
-				console.log('elem.validity ', elem.validity);
+
 				/*
 				* errorLabel placed next to an element is the container we want to use 
 				* for validation error message for that element
@@ -94,7 +93,6 @@ export default class ValidatedForm extends Component {
 				}
 			}
 
-			//Return 'false', as the formEl.checkValidity() method said there are some invalid form inputs.
 			return false;
 		} else {
 			//The form is valid, so we clear all the error messages
@@ -106,7 +104,6 @@ export default class ValidatedForm extends Component {
 				}
 			}
 
-			//Return 'true', as the form is valid for submission
 			return true;
 		}
 	};
