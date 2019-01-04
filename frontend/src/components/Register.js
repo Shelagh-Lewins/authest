@@ -22,7 +22,7 @@ class Register extends Component {
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.setPasswordConfirmValidity = this.setPasswordConfirmValidity.bind(this);
+		// this.setPasswordConfirmValidity = this.setPasswordConfirmValidity.bind(this);
 	}
 
 	handleInputChange(e) {
@@ -60,21 +60,6 @@ class Register extends Component {
 		}
 	}
 
-	setPasswordConfirmValidity(e) {
-		const node = ReactDOM.findDOMNode(this);
-
-		if (node instanceof HTMLElement) {
-	    const password = node.querySelector('#password');
-	    const password_confirm = node.querySelector('#password_confirm');
-
-	    if (password.value === password_confirm.value) {
-	    	 password_confirm.setCustomValidity('');
-	    } else {
-	    	password_confirm.setCustomValidity('Passwords must match');
-	    }
-		}
-	}
-
 	///////////////
 
 	render() {
@@ -94,7 +79,11 @@ class Register extends Component {
 		return(
 			<Container>
 				<h2>Create an account</h2>
-				<ValidatedForm onSubmit={ this.handleSubmit }>
+				<ValidatedForm onSubmit={ this.handleSubmit } inputsmustmatch={ {
+					'input1': 'password',
+					'input2': 'password_confirm',
+					'message': 'Passwords must match',
+				} }>
 					<Row>
 						<Col>
 							<div className="form-group">
@@ -143,7 +132,6 @@ class Register extends Component {
 									value={ this.state.password }
 									placeholder="Password"
 									onChange={ this.handleInputChange }
-									onInput= { this.setPasswordConfirmValidity }
 								/>
 								<div className='invalid-feedback' />
 							</div>
@@ -163,7 +151,6 @@ class Register extends Component {
 									value={ this.state.password_confirm }
 									placeholder="Confirm password"
 									onChange={ this.handleInputChange }
-									onInput= { this.setPasswordConfirmValidity }
 								/>
 								<div className='invalid-feedback' />
 								<small className='form-text text-muted'><ul>

@@ -25,11 +25,64 @@ export default class ValidatedForm extends Component {
 		super();
 
 		this.validate = this.validate.bind(this);
+		this.checkFieldMatch = this.checkFieldMatch.bind(this);
 	}
 
 	state = {
 		'isValidated': false
 	};
+
+	componentDidMount() {
+		if(this.props.inputsmustmatch) {
+			// there are two inputs whose values must match
+			// specified by id
+			// at present only one pair can be specified
+			// as a property of the ValidatedForm
+			/*
+				inputsmustmatch={ {
+					'input1': 'password',
+					'input2': 'password_confirm',
+					'message': 'Passwords should match',
+				} }
+
+			*/
+			// this should be revisited if we ever need more than one matching pair in a form
+			// the second is constrained to match the first
+			// i.e. input2 will display the error message
+			const formEl = ReactDOM.findDOMNode(this); // component parent node
+
+			const input1Id = this.props.inputsmustmatch.input1;
+			const input2Id = this.props.inputsmustmatch.input2;
+
+			const input1Element = formEl.querySelector(`#${input1Id}`);
+
+			const input2Element = formEl.querySelector(`#${input2Id}`);
+
+			if (input1Element instanceof HTMLElement && input2Element instanceof HTMLElement) {
+				input1Element.oninput = (e) => this.checkFieldMatch(input1Id, input2Id, e);
+				input2Element.oninput = (e) => this.checkFieldMatch(input1Id, input2Id, e);
+			}
+		}
+	}
+
+	checkFieldMatch(input1, input2, e) {
+		// check whether the values of two inputs match
+		// if they don't, add an HTML validity message to input2
+		const node = ReactDOM.findDOMNode(this);
+
+		if (node instanceof HTMLElement) {
+	    const input1Element = node.querySelector(`#${input1}`);
+	    const input2Element = node.querySelector(`#${input2}`);
+
+	    if (input1Element instanceof HTMLElement && input2Element instanceof HTMLElement) {
+		    if (input1Element.value === input2Element.value) {
+		    	 input2Element.setCustomValidity('');
+		    } else {
+		    	input2Element.setCustomValidity(this.props.inputsmustmatch.message);
+		    }
+		  }
+		}
+	}
 
 	customMessages = {
 		// uncomment a message to use it in place of the HTML5 default
