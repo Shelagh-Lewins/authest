@@ -14,7 +14,7 @@ import $ from 'jquery';
 
 export const registerUser = (user, history) => dispatch => {
 	var formData  = new FormData();
-
+	console.log('history ', history);
 	// Push our data into our FormData object
 	for(var name in user) {
 		formData.append(name, user[name]);
@@ -25,18 +25,40 @@ export const registerUser = (user, history) => dispatch => {
 	} */
 
 	fetch('/api/v1/rest-auth/registration/', { 'method': 'POST', 'body': formData })
-		.then(res => history.push('/registration'))
-		.catch(err => {
-			dispatch({
-				'type': GET_ERRORS,
-				'payload': err.response.data
-			});
-		});
+		// this nested set of callbacks allows errors to be found and the server error message to be reported
+		.then(response => 
+			response.json().then(data => ({
+				'data': data,
+				'ok': response.ok
+			})
+			).then(res => {
+				if(res.ok) {
+					history.push('/registration');
+				} else {
+					// errors are returned as an object with a key per possible error, e.g. username, email
+					// each error then is an array of texts
+					// informative but overcomplicated!
+					// user just wants to see a list of error texts explaining why registration failed
+					let errorTexts = [];
+
+					Object.keys(res.data).forEach(function (error) {
+						res.data[error].map((text) => {
+							errorTexts.push(text);
+						});
+					});
+
+					dispatch({
+						'type': GET_ERRORS,
+						'payload': { 'registration': errorTexts },
+					});
+				}
+			})
+		);
 };
-
-export const loginUser = (user) => dispatch => {
+ 
+export const loginUser = (user, history) => dispatch => {
 	var formData  = new FormData();
-
+	console.log('history ', history);
 	// Push our data into our FormData object
 	for(var name in user) {
 		formData.append(name, user[name]);
@@ -45,6 +67,7 @@ export const loginUser = (user) => dispatch => {
 	return fetch('/api/v1/rest-auth/login/', { 'method': 'POST', 'body': formData })
 		.then(res => {
 			if(res.ok) {
+				history.push('/login');
 				return res.json();
 			} else {
 				dispatch({

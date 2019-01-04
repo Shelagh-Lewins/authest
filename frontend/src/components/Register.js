@@ -6,9 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../actions/authentication';
-
 import ValidatedForm from './ValidatedForm';
-import ReactDOM from 'react-dom';
 
 class Register extends Component {
 	constructor() {
@@ -18,11 +16,9 @@ class Register extends Component {
 			'email': '',
 			'password': '',
 			'password_confirm': '',
-			'errors': {}
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		// this.setPasswordConfirmValidity = this.setPasswordConfirmValidity.bind(this);
 	}
 
 	handleInputChange(e) {
@@ -63,8 +59,18 @@ class Register extends Component {
 	///////////////
 
 	render() {
-		const { errors } = this.state;
-		/* password requirements for django.auth are
+		const errors = this.props.errors;
+		let reactElementsArray = [];
+
+		if (errors.registration) {
+			reactElementsArray = errors.registration.map((data, index) => {
+			  return (
+			    <li key={index}>{data}</li>
+			  );
+			});
+		}
+
+		/* Note on password validation. Password requirements for django.auth are
 		https://docs.djangoproject.com/en/2.1/topics/auth/passwords/
 
 		UserAttributeSimilarityValidator, which checks the similarity between the password and a set of attributes of the user.
@@ -76,6 +82,7 @@ class Register extends Component {
 		NumericPasswordValidator, which checks whether the password isn’t entirely numeric.
 
 	*/
+
 		return(
 			<Container>
 				<h2>Create an account</h2>
@@ -171,7 +178,7 @@ class Register extends Component {
 					</Row>
 	        <Row>
 						<Col>
-							{errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
+							{errors.registration && <div className="invalid-feedback" style={{ 'display': 'block' }}><ul>{reactElementsArray}</ul></div>}
 						</Col>
 					</Row>
 	      </ValidatedForm>
