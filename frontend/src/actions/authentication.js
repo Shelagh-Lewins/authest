@@ -14,7 +14,7 @@ import $ from 'jquery';
 
 export const registerUser = (user, history) => dispatch => {
 	var formData  = new FormData();
-	console.log('history ', history);
+
 	// Push our data into our FormData object
 	for(var name in user) {
 		formData.append(name, user[name]);
@@ -42,7 +42,7 @@ export const registerUser = (user, history) => dispatch => {
 					let errorTexts = [];
 
 					Object.keys(res.data).forEach(function (error) {
-						res.data[error].map((text) => {
+						res.data[error].map((text) => { // eslint-disable-line array-callback-return
 							errorTexts.push(text);
 						});
 					});
@@ -58,7 +58,7 @@ export const registerUser = (user, history) => dispatch => {
  
 export const loginUser = (user, history) => dispatch => {
 	var formData  = new FormData();
-	console.log('history ', history);
+
 	// Push our data into our FormData object
 	for(var name in user) {
 		formData.append(name, user[name]);
@@ -67,7 +67,7 @@ export const loginUser = (user, history) => dispatch => {
 	return fetch('/api/v1/rest-auth/login/', { 'method': 'POST', 'body': formData })
 		.then(res => {
 			if(res.ok) {
-				history.push('/login');
+				history.push('/');
 				return res.json();
 			} else {
 				dispatch({
@@ -114,7 +114,7 @@ export const logoutUser = (history) => dispatch => {
 			} else {
 				localStorage.removeItem('jwtToken');
 				setAuthToken(false);
-				history.push('/logout');
+				history.push('/');
 
 				dispatch({
 					'type': GET_ERRORS,
@@ -219,6 +219,7 @@ export const resetPasswordComplete = (token) => {
 // For now, a Django template is used for entering the new password at http://localhost:8000/api/v1/reset/Mw/52l-11fe5a58b91d894386e8/
 
 // https://www.techiediaries.com/django-react-forms-csrf-axios/
+/*
 function getCookie(name) {
 	var cookieValue = null;
 	if (document.cookie && document.cookie !== '') {
@@ -269,3 +270,4 @@ export const resetPassword = (data) => dispatch => {
 			});
 		});
 };
+*/

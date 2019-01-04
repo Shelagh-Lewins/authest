@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../actions/authentication';
-import ValidatedForm from './ValidatedForm';
+import ValidatedForm from './ValidatedForm.js';
 
 class Register extends Component {
 	constructor() {
@@ -59,11 +59,12 @@ class Register extends Component {
 	///////////////
 
 	render() {
+		// there may be more than one error, e.g. username and email already in use
 		const errors = this.props.errors;
-		let reactElementsArray = [];
+		let errorTexts = [];
 
 		if (errors.registration) {
-			reactElementsArray = errors.registration.map((data, index) => {
+			errorTexts = errors.registration.map((data, index) => {
 			  return (
 			    <li key={index}>{data}</li>
 			  );
@@ -178,7 +179,7 @@ class Register extends Component {
 					</Row>
 	        <Row>
 						<Col>
-							{errors.registration && <div className="invalid-feedback" style={{ 'display': 'block' }}><ul>{reactElementsArray}</ul></div>}
+							{errors.registration && <div className="form-feedback " style={{ 'display': 'block' }}><ul>{errorTexts}</ul></div>}
 						</Col>
 					</Row>
 	      </ValidatedForm>

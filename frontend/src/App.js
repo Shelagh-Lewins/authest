@@ -15,6 +15,7 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
 // note that the Django template pages reset password load the bootstrap css from static/bootstrap
 
 if(localStorage.jwtToken) {
