@@ -10,7 +10,6 @@ import {
 	FORGOT_PASSWORD_EMAIL_SENT,
 	RESET_PASSWORD_COMPLETE
 } from './types';
-import $ from 'jquery';
 
 export const registerUser = (user, history) => dispatch => {
 	var formData  = new FormData();
@@ -33,7 +32,7 @@ export const registerUser = (user, history) => dispatch => {
 			})
 			).then(res => {
 				if(res.ok) {
-					history.push('/registration');
+					history.push('/');
 				} else {
 					// errors are returned as an object with a key per possible error, e.g. username, email
 					// each error then is an array of texts
