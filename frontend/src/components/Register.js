@@ -60,14 +60,7 @@ class Register extends Component {
 		}
 	}
 
-	///////////////
-	/* submit = () => {
-		console.log('form submitted');
-	} */
-
 	setPasswordConfirmValidity(e) {
-		// this.handleInputChange(e);
-
 		const node = ReactDOM.findDOMNode(this);
 
 		if (node instanceof HTMLElement) {
@@ -145,7 +138,7 @@ class Register extends Component {
 									name="password"
 									required={true}
 									minLength={8}
-									pattern="^(?!^\d+$)^.+$"
+									pattern=".*[^0-9].*"
 									id="password"
 									value={ this.state.password }
 									placeholder="Password"
@@ -165,8 +158,8 @@ class Register extends Component {
 									name="password_confirm"
 									id="password_confirm"
 									required={true}
-									pattern='(?!^\d+$)^.+$.{8,}'
 									minLength={8}
+									pattern=".*[^0-9].*"
 									value={ this.state.password_confirm }
 									placeholder="Confirm password"
 									onChange={ this.handleInputChange }
