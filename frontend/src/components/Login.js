@@ -12,7 +12,7 @@ class Login extends Component {
 	constructor() {
 		super();
 		this.state = {
-			'username': '',
+			'useridentifier': '',
 			'password': ''
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -45,7 +45,7 @@ class Login extends Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		const user = {
-			'username': this.state.username,
+			'userIdentifier': this.state.useridentifier,
 			'password': this.state.password,
 		};
 		this.props.loginUser(user, this.props.history);
@@ -60,15 +60,15 @@ class Login extends Component {
 					<Row>
 						<Col>
 							<div className="form-group">
-								<Label for="username">Username</Label>
+								<Label for="useridentifier">Email address or username</Label>
 								<Input
 									type="text"
-									name="username"
-									id="username"
+									name="useridentifier"
+									id="useridentifier"
 									required={true}
 									onChange={ this.handleInputChange }
-									value={ this.state.username }
-									placeholder="Username"
+									value={ this.state.useridentifier }
+									placeholder="Email address or username"
 								/>
 								<div className='invalid-feedback' />
 							</div>
