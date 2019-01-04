@@ -155,11 +155,7 @@ REST_FRAMEWORK = {
     }
 }
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-
-# AUTHENTICATION_BACKENDS = [('django.contrib.auth.backends.ModelBackend',
-#    'api.emailbackend.EmailBackend'),]
-
+# django rest auth
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_USERNAME_REQUIRED = False
