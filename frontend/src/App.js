@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
+import Account from './components/Account';
 import ForgotPassword from './components/ForgotPassword';
 // import ResetPassword from './components/ResetPassword';
 
@@ -41,6 +42,7 @@ class App extends Component {
 							<Route exact path="/register" component={ Register } />
 							<Route exact path="/login" component={ Login } />
 							<Route exact path="/forgotpassword" component={ ForgotPassword } />
+							<Route path="/account" component={ Account } />
 							{/* <Route path="/reset/:uid?/:token?" component={ ResetPassword } /> */}
 						</div>
 					</div>

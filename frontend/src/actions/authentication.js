@@ -58,20 +58,10 @@ export const registerUser = (user, history) => dispatch => {
 export const loginUser = (user, history) => dispatch => {
 	var formData  = new FormData();
 
-	// user may log in with email address or username
-	// we'll assume it's an email address iff it contains an @ followed by a .
-	// if somebody insists on choosing a username that looks like an email address, login won't work.
-	// that, and somebody using somebody else's email address as their username AND having the same password, are such edge cases that I'm choosing not to support them.
-	let userIdentifier = user.userIdentifier;
-	const atLocation = userIdentifier.indexOf('@');
-
-	if (atLocation !== -1 && userIdentifier.indexOf('.') > atLocation) {
-		formData.append('email', user.userIdentifier);
-	} else {
-		formData.append('username', user.userIdentifier);
+	// Push our data into our FormData object
+	for(var name in user) {
+		formData.append(name, user[name]);
 	}
-
-	formData.append('password', user.password);
 
 	return fetch('/api/v1/rest-auth/login/', { 'method': 'POST', 'body': formData })
 		.then(res => {
@@ -173,9 +163,11 @@ export const getUserInfo = ({ token }) => (dispatch, getState) => {
 			if(!user) {
 				return;
 			}
+			console.log('user ', user);
 			return dispatch(setUserInfo({
 				'username': user.username,
 				'email': user.email,
+				'slug': user.slug,
 			}));
 		});
 };

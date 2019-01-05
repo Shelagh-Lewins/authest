@@ -95,6 +95,26 @@ class Register extends Component {
 					<Row>
 						<Col>
 							<div className="form-group">
+								<Label for="email">Email address</Label>
+								<Input
+									type="email"
+									name="email"
+									required={true}
+									id="email"
+									onChange={ this.handleInputChange }
+									value={ this.state.email }
+									placeholder="Enter your email address"
+								/>
+								<div className='invalid-feedback' />
+								<small className='form-text text-muted'>
+									<p>You will use your email addres to login. It will not be seen by other users.</p>
+								</small>
+							</div>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							<div className="form-group">
 								<Label for="username">Username</Label>
 								<Input
 									type="text"
@@ -103,26 +123,12 @@ class Register extends Component {
 									required={true}
 									onChange={ this.handleInputChange }
 									value={ this.state.username }
-									placeholder="Username"
+									placeholder="Enter your username"
 								/>
 								<div className='invalid-feedback' />
-							</div>
-						</Col>
-					</Row>
-					<Row>
-						<Col>
-							<div className="form-group">
-								<Label for="email">Email</Label>
-								<Input
-									type="email"
-									name="email"
-									required={true}
-									id="email"
-									onChange={ this.handleInputChange }
-									value={ this.state.email }
-									placeholder="Email address"
-								/>
-								<div className='invalid-feedback' />
+								<small className='form-text text-muted'>
+									<p>Your username may be seen by other users, for example in comments.</p>
+								</small>
 							</div>
 						</Col>
 					</Row>
@@ -138,7 +144,7 @@ class Register extends Component {
 									pattern=".*[^0-9].*"
 									id="password"
 									value={ this.state.password }
-									placeholder="Password"
+									placeholder="Enter your password"
 									onChange={ this.handleInputChange }
 								/>
 								<div className='invalid-feedback' />
@@ -157,7 +163,7 @@ class Register extends Component {
 									minLength={8}
 									pattern=".*[^0-9].*"
 									value={ this.state.password_confirm }
-									placeholder="Confirm password"
+									placeholder="Confirm your password"
 									onChange={ this.handleInputChange }
 								/>
 								<div className='invalid-feedback' />

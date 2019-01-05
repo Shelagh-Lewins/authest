@@ -28,10 +28,11 @@ class Navbar extends Component {
 
 	render() {
 		const { isAuthenticated, user } = this.props.auth;
-
+		console.log('navbar. state ', this.props.auth);
 		const authLinks = (
 			<ul className="navbar-nav ml-auto">
-				<a href="/" className="nav-link" onClick={this.onLogout.bind(this)}>Logout</a>
+				{user.username && <li className="nav-item"><Link to="/account" className="nav-link">{user.username}</Link></li>}
+				<li className="nav-item"><Link to="/" className="nav-link" onClick={this.onLogout.bind(this)}>Logout</Link></li>
 			</ul>
 		);
 		const guestLinks = (
@@ -52,7 +53,6 @@ class Navbar extends Component {
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className={`collapse navbar-collapse ${this.state.showDropdown ? 'show' : ''}`} id="navbarSupportedContent">
-					{isAuthenticated && <span>{user.username}</span>}
 					{isAuthenticated ? authLinks : guestLinks}
 					<form className="form-inline my-2 my-lg-0">
 						<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
