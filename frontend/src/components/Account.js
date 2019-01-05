@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Link } from 'reactstrap';
 
 class Account extends Component {
 	constructor() {
@@ -37,13 +37,8 @@ class Account extends Component {
 		// var csrftoken = this.getCookie('csrftoken');
 		return(
 
-			<Container>
-				<Row>
-					<Col>
-						<a className="nav-link" href="/">Change password</a>
-					</Col>
-				</Row>
-			</Container>
+			<a className="nav-link" href="/api/v1/password_change">Change password</a>
+
 		);
 	}
 }

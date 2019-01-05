@@ -109,7 +109,6 @@ class Login extends Component {
 		);
 	}
 }
-// TODO fix up validation
 
 Login.propTypes = {
 	'loginUser': PropTypes.func.isRequired,
