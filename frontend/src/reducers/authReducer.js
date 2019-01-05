@@ -33,6 +33,7 @@ export default function(state = initialState, action ) {
 				'user': {
 					'username': action.payload.username,
 					'email': action.payload.email,
+					'slug': action.payload.slug,
 				}
 			}, state);
 
