@@ -34,6 +34,7 @@ export const registerUser = (user, history) => dispatch => {
 	for(var name in user) {
 		formData.append(name, user[name]);
 	}
+	console.log('register formData ', formData);
 	/*
 	for (var pair of formData.entries()) {
 		console.log(pair[0]+ ', ' + pair[1]); 
@@ -178,6 +179,9 @@ export const getUserInfo = (token) => (dispatch, getState) => {
 			if(!user) {
 				return;
 			}
+
+			dispatch(changePassword());
+			console.log('done');
 			return dispatch(setUserInfo({
 				'username': user.username,
 				'email': user.email,
@@ -228,6 +232,48 @@ export const resetPasswordComplete = (token) => {
 		'type': RESET_PASSWORD_COMPLETE,
 		'token': token,
 	};
+};
+
+//////////////////
+export const changePassword = () => (dispatch) => {
+	const token = getAuthToken();
+
+	// todo make form and use form data
+
+	const data = {
+		'new_password1': 'othertext',
+		'new_password2': 'othertext',
+		'old_password': 'sometext'
+	};
+
+	var formData  = new FormData();
+
+	// Push our data into our FormData object
+	for(var name in data) {
+		formData.append(name, data[name]);
+	}
+	console.log('changePassword formData ', formData);
+
+	const headers = {
+		'Authorization': `Token ${token}`,
+	};
+
+	return fetch('/api/v1/rest-auth/password/change/', {
+		headers,
+		'method': 'POST',
+		'body': formData,
+	})
+		.then(res => {
+			if(res.ok) {
+				console.log('successfully changed password');
+				return res.json();
+			} else {
+				console.log('error changing password');
+			}
+		})
+		.then(res => {
+			console.log('Change password res ', res);
+		});
 };
 
 // This function does not yet work. There is something wrong with the fetch request, perhaps the csrf tokens which I don't know how to generate correctly. The code here and in the ResetPassword component should be fixed or removed at some point.
