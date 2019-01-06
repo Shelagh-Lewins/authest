@@ -1,5 +1,5 @@
 // authentication.js
-import setAuthToken from '../setAuthToken';
+// import setAuthToken from '../setAuthToken';
 // import jwt_decode from 'jwt-decode';
 import {
 	GET_ERRORS,
@@ -10,6 +10,22 @@ import {
 	FORGOT_PASSWORD_EMAIL_SENT,
 	RESET_PASSWORD_COMPLETE
 } from './types';
+
+import store from '../store';
+
+// Side effects Services
+export const getAuthToken = () => {
+ 	return localStorage.getItem('jwtToken');
+};
+
+function setAuthToken(token) {
+	localStorage.setItem('jwtToken', token);
+}
+
+function removeAuthToken() {
+	localStorage.removeItem('jwtToken');
+}
+
 
 export const registerUser = (user, history) => dispatch => {
 	var formData  = new FormData();
@@ -54,7 +70,9 @@ export const registerUser = (user, history) => dispatch => {
 			})
 		);
 };
- 
+
+// TODO rework auth as a saga with token refresh
+// https://github.com/redux-saga/redux-saga/issues/14
 export const loginUser = (user, history) => dispatch => {
 	var formData  = new FormData();
 
@@ -79,21 +97,19 @@ export const loginUser = (user, history) => dispatch => {
 			if(!data) {
 				return;
 			}
-			// token is an object { key: value }
-			// localStorage can only store a string
-			localStorage.setItem('jwtToken', data.key);
-			setAuthToken(data.key);
-			dispatch(getUserInfo({ 'token': data.key })); // get the user profile
-			return dispatch(setCurrentUser({
-				'token': data.key, // just set the token
-			}));
+			// data is an object { key: token }
+			// we want the token string
+			return dispatch(setCurrentUser(data.key));
 		});
 };
 
-export const setCurrentUser = token => {
+// we pass the token in because writing it to the store is asynchronous
+export const setCurrentUser = (token, dispatch) => {
+	setAuthToken(token);
+	store.dispatch(getUserInfo(token));
 	return {
 		'type': SET_CURRENT_USER,
-		'payload': token,
+		'payload': { token },
 	};
 };
 
@@ -109,10 +125,9 @@ export const logoutUser = (history) => dispatch => {
 	})
 		.then(res => {
 			if(res.ok) {
+				removeAuthToken();
 				return res.json();
 			} else {
-				localStorage.removeItem('jwtToken');
-				setAuthToken(false);
 				history.push('/');
 
 				dispatch({
@@ -138,7 +153,7 @@ export const setUserInfo = user => {
 	};
 };
 
-export const getUserInfo = ({ token }) => (dispatch, getState) => {
+export const getUserInfo = (token) => (dispatch, getState) => {
 	const headers = {
 		'Authorization': `Token ${token}`,
 		'Accept': 'application/json',
@@ -163,7 +178,6 @@ export const getUserInfo = ({ token }) => (dispatch, getState) => {
 			if(!user) {
 				return;
 			}
-			console.log('user ', user);
 			return dispatch(setUserInfo({
 				'username': user.username,
 				'email': user.email,
