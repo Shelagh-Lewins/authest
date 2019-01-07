@@ -1,17 +1,18 @@
 // authentication.js
-// import setAuthToken from '../setAuthToken';
-// import jwt_decode from 'jwt-decode';
-import {
-	GET_ERRORS,
-	SET_CURRENT_USER,
-	SET_USER_INFO,
-	LOGOUT_USER_COMPLETE,
-	FORGOT_PASSWORD_EMAIL_NOT_SENT,
-	FORGOT_PASSWORD_EMAIL_SENT,
-	RESET_PASSWORD_COMPLETE
-} from './types';
 
 import store from '../store';
+import fetchAPI from '../modules/fetchAPI';
+
+// definte all action creators up front so you can see them
+export const GET_ERRORS = 'GET_ERRORS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const LOGOUT_USER_COMPLETE = 'LOGOUT_USER_COMPLETE';
+export const SET_USER_INFO = 'SET_USER_INFO';
+export const FORGOT_PASSWORD_EMAIL_SENT = 'FORGOT_PASSWORD_EMAIL_SENT';
+export const FORGOT_PASSWORD_EMAIL_NOT_SENT = 'FORGOT_PASSWORD_EMAIL_NOT_SENT';
+export const RESET_PASSWORD_COMPLETE = 'RESET_PASSWORD_COMPLETE';
+export const CHANGE_PASSWORD_COMPLETE = 'CHANGE_PASSWORD_COMPLETE';
+export const CHANGE_PASSWORD_STARTED = 'CHANGE_PASSWORD_STARTED';
 
 // Side effects Services
 export const getAuthToken = () => {
@@ -34,42 +35,25 @@ export const registerUser = (user, history) => dispatch => {
 	for(var name in user) {
 		formData.append(name, user[name]);
 	}
-	console.log('register formData ', formData);
+
 	/*
 	for (var pair of formData.entries()) {
 		console.log(pair[0]+ ', ' + pair[1]); 
 	} */
 
-	fetch('/api/v1/rest-auth/registration/', { 'method': 'POST', 'body': formData })
-		// this nested set of callbacks allows errors to be found and the server error message to be reported
-		.then(response => 
-			response.json().then(data => ({
-				'data': data,
-				'ok': response.ok
-			})
-			).then(res => {
-				if(res.ok) {
-					history.push('/');
-				} else {
-					// errors are returned as an object with a key per possible error, e.g. username, email
-					// each error then is an array of texts
-					// informative but overcomplicated!
-					// user just wants to see a list of error texts explaining why registration failed
-					let errorTexts = [];
-
-					Object.keys(res.data).forEach(function (error) {
-						res.data[error].map((text) => { // eslint-disable-line array-callback-return
-							errorTexts.push(text);
-						});
-					});
-
-					dispatch({
-						'type': GET_ERRORS,
-						'payload': { 'registration': errorTexts },
-					});
-				}
-			})
-		);
+	return fetchAPI({
+		'url': '/api/v1/rest-auth/registration/',
+		'data': formData,
+		'method': 'POST',
+	}).then(response => {
+	  	history.push('/');
+	    return response;
+	}).catch(error => {
+		dispatch({
+			'type': GET_ERRORS,
+			'payload': { 'registration': error.message },
+		});
+	});
 };
 
 // TODO rework auth as a saga with token refresh
@@ -82,32 +66,25 @@ export const loginUser = (user, history) => dispatch => {
 		formData.append(name, user[name]);
 	}
 
-	return fetch('/api/v1/rest-auth/login/', { 'method': 'POST', 'body': formData })
-		.then(res => {
-			if(res.ok) {
-				history.push('/');
-				return res.json();
-			} else {
-				dispatch({
-					'type': GET_ERRORS,
-					'payload': { 'authentication': 'Unable to log in with the provided credentials, please try again.' }
-				});
-			}
-		})
-		.then(data => {
-			if(!data) {
-				return;
-			}
-			// data is an object { key: token }
-			// we want the token string
-			return dispatch(setCurrentUser(data.key));
-		}).then(() => {
-			// after store has been updated with token, we can query the server for current user info
-			store.dispatch(getUserInfo());
+	return fetchAPI({
+		'url': '/api/v1/rest-auth/login/',
+		'data': formData,
+		'method': 'POST',
+		'useAuth': false,
+	}).then(response => {
+	  	history.push('/');
+	    return dispatch(setCurrentUser(response.key));
+	}).then(() => {
+		// after store has been updated with token, we can query the server for current user info
+		return store.dispatch(getUserInfo());
+	}).catch(error => {
+		dispatch({
+			'type': GET_ERRORS,
+			'payload': { 'authentication': 'Unable to log in with the provided credentials, please try again.' },
 		});
+	});
 };
 
-// we pass the token in because writing it to the store is asynchronous
 export const setCurrentUser = (token, dispatch) => {
 	setAuthToken(token);
 	return {
@@ -239,10 +216,9 @@ export const resetPasswordComplete = (token) => {
 	};
 };
 
-//////////////////
+//////////////////////////////////
+// change password
 export const changePassword = (data) => (dispatch) => {
-	const token = getAuthToken();
-
 	var formData  = new FormData();
 
 	// Push our data into our FormData object
@@ -250,143 +226,38 @@ export const changePassword = (data) => (dispatch) => {
 		formData.append(name, data[name]);
 	}
 
-	fetchAPI('/api/v1/rest-auth/password/change/', formData).then(response => {
-		console.log('response ', response);
-	  if (response.ok) {
-	    return response;
-	  }
-	}).catch(error => {
-		console.log('error ', JSON.stringify(error.message));
+	dispatch({
+		'type': CHANGE_PASSWORD_STARTED,
 	});
 
-	return;
-
-	const headers = {
-		'Authorization': `Token ${token}`,
-	};
-
-	return fetch('/api/v1/rest-auth/password/change/', {
-		headers,
+	return fetchAPI({
+		'url': '/api/v1/rest-auth/password/change/',
+		'data': formData,
 		'method': 'POST',
-		'body': formData,
-	})
-		.then(res => {
-			if(res.ok) {
-				console.log('successfully changed password');
-				return res.json();
-			} else {
-				console.log('Change password res 1 ', res);
-				console.log('error changing password');
-			}
-		})
-		.then(res => {
-			console.log('Change password res 2 ', res);
+		'useAuth': true,
+	}).then(response => {
+	  dispatch({
+			'type': CHANGE_PASSWORD_COMPLETE,
 		});
+	    return response;
+	}).catch(error => {
+		dispatch({
+			'type': GET_ERRORS,
+			'payload': { 'changePassword': error.message },
+		});
+	});
 };
 
-function fetchAPI(url, data, method = 'POST') {
-	const headers = {
-		'Authorization': `Token ${getAuthToken()}`,
+export const changePasswordStarted = (token) => {
+	return {
+		'type': CHANGE_PASSWORD_STARTED,
 	};
-
-	return fetch(url, { headers, 'method': method, 'body': data })
-		.then(response => {
-			if (response.ok) {
-				const contentType = response.headers.get('Content-Type') || '';
-
-				if (contentType.includes('application/json')) {
-					return response.json().catch(error => {
-						return Promise.reject(new Error('Invalid JSON: ' + error.message));
-					});
-				}
-
-				if (contentType.includes('text/html')) {
-					return response.text().then(html => {
-						return {
-							'page_type': 'generic',
-							'html': html
-						};
-					}).catch(error => {
-						return Promise.reject(new Error('HTML error: ' + error.message));
-					});
-				}
-
-				return Promise.reject(new Error('Invalid content type: ' + contentType));
-			}
-
-			if (response.status === 404) {
-				return Promise.reject(new Error('Page not found: ' + url));
-			}
-
-			return response.json().then(res => {
-				// if the response is ok but the server rejected the request, e.g. because of a wrong password, we want to display the reason
-				// the information is contained in the json()
-				// there may be more than one error
-				let errors = [];
-				Object.keys(res).forEach((key) => {
-					errors.push(`${key}: ${res[key]}`);
-				});
-				return Promise.reject(new Error(errors)
-				);
-			});
-		}).catch(error => {
-			return Promise.reject(new Error(error.message));
-		});
 };
 
-// This function does not yet work. There is something wrong with the fetch request, perhaps the csrf tokens which I don't know how to generate correctly. The code here and in the ResetPassword component should be fixed or removed at some point.
-// For now, a Django template is used for entering the new password at http://localhost:8000/api/v1/reset/Mw/52l-11fe5a58b91d894386e8/
-
-// https://www.techiediaries.com/django-react-forms-csrf-axios/
-/*
-function getCookie(name) {
-	var cookieValue = null;
-	if (document.cookie && document.cookie !== '') {
-		var cookies = document.cookie.split(';');
-		for (var i = 0; i < cookies.length; i++) {
-			var cookie = $.trim(cookies[i]);
-			if (cookie.substring(0, name.length + 1) === (name + '=')) {
-				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-				break;
-			}
-		}
-	}
-	return cookieValue;
-}
-
-export const resetPassword = (data) => dispatch => {
-	console.log('resetPassword action creator. data ', data);
-
-	var body = '';
-	var csrftoken = getCookie('csrftoken');
-
-	body += `csrfmiddlewaretoken=${csrftoken}&`;
-	body += `new_password1=${data.password}&`;
-	body += `new_password2=${data.password_confirm}`;
-
-	console.log('token ', data.csrfmiddlewaretoken);
-	console.log('body ', body);
-	console.log('data.uid ', data.uid);
-
-	return fetch(`/api/v1/reset1/${data.uid}/set-password/`,
-		{ 'credentials': 'include', 'method': 'POST', 'mode': 'same-origin',
-			'headers': {
-				'Accept': 'text/html,application/xhtml+xml,application/xml',
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'X-CSRFToken': csrftoken
-			}, 'body': body })
-		.then(res => {
-			return res.json();
-		})
-		.then(token => {
-			return dispatch(resetPasswordComplete(token));
-		})
-		.catch(err => {
-			console.log('error ', err.message);
-			dispatch({
-				'type': GET_ERRORS,
-				'payload': err.response.data
-			});
-		});
+export const changePasswordComplete = (token) => {
+	return {
+		'type': CHANGE_PASSWORD_COMPLETE,
+	};
 };
-*/
+
+

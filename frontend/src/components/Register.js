@@ -43,11 +43,11 @@ class Register extends Component {
 		if(nextProps.auth.isAuthenticated) {
 			this.props.history.push('/');
 		}
-		if(nextProps.errors) {
+		/* if(nextProps.errors) {
 			this.setState({
 				'errors': nextProps.errors
 			});
-		}
+		} */
 	}
 
 	componentDidMount() {
@@ -59,18 +59,6 @@ class Register extends Component {
 	///////////////
 
 	render() {
-		// there may be more than one error, e.g. username and email already in use
-		const { errors } = this.props;
-		let errorTexts = [];
-
-		if (errors.registration) {
-			errorTexts = errors.registration.map((data, index) => {
-			  return (
-			    <li key={index}>{data}</li>
-			  );
-			});
-		}
-
 		/* Note on password validation. Password requirements for django.auth are
 		https://docs.djangoproject.com/en/2.1/topics/auth/passwords/
 
@@ -185,7 +173,7 @@ class Register extends Component {
 					</Row>
 	        <Row>
 						<Col>
-							{errors.registration && <div className="form-feedback " style={{ 'display': 'block' }}><ul>{errorTexts}</ul></div>}
+							{this.props.errors.registration && <div className="form-feedback " style={{ 'display': 'block' }}><p>{this.props.errors.registration}</p></div>}
 						</Col>
 					</Row>
 	      </ValidatedForm>

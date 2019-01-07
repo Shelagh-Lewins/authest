@@ -29,11 +29,11 @@ class Login extends Component {
 		if(nextProps.auth.isAuthenticated) {
 			this.props.history.push('/');
 		}
-		if(nextProps.errors) {
+		/* if(nextProps.errors) {
 			this.setState({
 				'errors': nextProps.errors
 			});
-		}
+		} */
 	}
 
 	handleInputChange(e) {
@@ -52,7 +52,6 @@ class Login extends Component {
 	}
 
 	render() {
-		const { errors } = this.props;
 		return(
 			<Container>
 				<h2>Login</h2>
@@ -100,7 +99,7 @@ class Login extends Component {
 					</Row>
 	        <Row>
 						<Col>
-							{errors.authentication && <div className="form-feedback " style={{ 'display': 'block' }}><ul>{errors.authentication}</ul></div>}
+							{this.props.errors.authentication && <div className="form-feedback " style={{ 'display': 'block' }}><p>{this.props.errors.authentication}</p></div>}
 						</Col>
 					</Row>
 				</ValidatedForm>

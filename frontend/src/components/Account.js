@@ -16,7 +16,6 @@ class Account extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log('account 1 ', nextProps.auth.isAuthenticated);
 		if(!nextProps.auth.isAuthenticated) {
 			this.props.history.push('/'); // if not logged in, redirect to Home
 		}
@@ -28,15 +27,12 @@ class Account extends Component {
 	}
 
 	componentDidMount() {
-		console.log('account 2 ', this.props.auth.isAuthenticated);
 		if(!this.props.auth.isAuthenticated) {
 			this.props.history.push('/');
 		}
 	}
 
 	render() {
-		const { errors } = this.state;
-
 		return(
 			<Link to="/changepassword" className="nav-link">Change password</Link>
 		);

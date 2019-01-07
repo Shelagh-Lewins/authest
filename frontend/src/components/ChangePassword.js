@@ -41,11 +41,11 @@ class ChangePassword extends Component {
 		if(!nextProps.auth.isAuthenticated) {
 			this.props.history.push('/'); // if not logged in, redirect to Home
 		}
-		if(nextProps.errors) {
+		/* if(nextProps.errors) {
 			this.setState({
 				'errors': nextProps.errors
 			});
-		}
+		} */
 	}
 
 	componentDidMount() {
@@ -57,18 +57,6 @@ class ChangePassword extends Component {
 	///////////////
 
 	render() {
-		// there may be more than one error, e.g. username and email already in use
-		const { errors } = this.props;
-		let errorTexts = [];
-
-		if (errors.changePassword) {
-			errorTexts = errors.changePassword.map((data, index) => {
-			  return (
-			    <li key={index}>{data}</li>
-			  );
-			});
-		}
-
 		return(
 			<Container>
 				<h2>Change your password</h2>
@@ -150,10 +138,11 @@ class ChangePassword extends Component {
 					</Row>
 	        <Row>
 						<Col>
-							{errors.changePassword && <div className="form-feedback " style={{ 'display': 'block' }}><ul>{errorTexts}</ul></div>}
+							{this.props.errors.changePassword && <div className="form-feedback " style={{ 'display': 'block' }}><p>{this.props.errors.changePassword}</p></div>}
 						</Col>
 					</Row>
 	      </ValidatedForm>
+	      {this.props.auth.changePasswordComplete && (<div className="feedback">Your new password has been saved</div>)}
 			</Container>
 		);
 	}
@@ -161,6 +150,7 @@ class ChangePassword extends Component {
 
 ChangePassword.propTypes = {
 	'changePassword': PropTypes.func.isRequired,
+	'changePasswordComplete': PropTypes.func.isRequired,
 	'auth': PropTypes.object.isRequired,
 	'errors': PropTypes.object.isRequired
 };

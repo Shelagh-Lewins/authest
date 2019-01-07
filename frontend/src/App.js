@@ -44,7 +44,6 @@ class App extends Component {
 							<Route exact path="/forgotpassword" component={ ForgotPassword } />
 							<Route exact path="/account" component={ Account } />
 							<Route exact path="/changepassword" component={ ChangePassword } />
-							{/* <Route path="/reset/:uid?/:token?" component={ ResetPassword } /> */}
 						</div>
 					</div>
 				</Router>
