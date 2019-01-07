@@ -15,7 +15,7 @@ import store from '../store';
 
 // Side effects Services
 export const getAuthToken = () => {
- 	return localStorage.getItem('jwtToken');
+	return localStorage.getItem('jwtToken');
 };
 
 function setAuthToken(token) {
@@ -101,13 +101,15 @@ export const loginUser = (user, history) => dispatch => {
 			// data is an object { key: token }
 			// we want the token string
 			return dispatch(setCurrentUser(data.key));
+		}).then(() => {
+			// after store has been updated with token, we can query the server for current user info
+			store.dispatch(getUserInfo());
 		});
 };
 
 // we pass the token in because writing it to the store is asynchronous
 export const setCurrentUser = (token, dispatch) => {
 	setAuthToken(token);
-	store.dispatch(getUserInfo(token));
 	return {
 		'type': SET_CURRENT_USER,
 		'payload': { token },
@@ -154,7 +156,13 @@ export const setUserInfo = user => {
 	};
 };
 
-export const getUserInfo = (token) => (dispatch, getState) => {
+export const getUserInfo = () => (dispatch) => {
+	const token = store.getState().auth.user.token;
+
+	if (!token) {
+		return;
+	}
+
 	const headers = {
 		'Authorization': `Token ${token}`,
 		'Accept': 'application/json',
@@ -180,8 +188,6 @@ export const getUserInfo = (token) => (dispatch, getState) => {
 				return;
 			}
 
-			dispatch(changePassword());
-			console.log('done');
 			return dispatch(setUserInfo({
 				'username': user.username,
 				'email': user.email,
@@ -219,7 +225,6 @@ export const forgotPassword = (email) => dispatch => {
 			return dispatch(forgotPasswordEmailSent());
 		})
 		.catch(err => {
-			console.log('error ', err.message);
 			dispatch({
 				'type': GET_ERRORS,
 				'payload': err.response.data
@@ -235,16 +240,8 @@ export const resetPasswordComplete = (token) => {
 };
 
 //////////////////
-export const changePassword = () => (dispatch) => {
+export const changePassword = (data) => (dispatch) => {
 	const token = getAuthToken();
-
-	// todo make form and use form data
-
-	const data = {
-		'new_password1': 'othertext',
-		'new_password2': 'othertext',
-		'old_password': 'sometext'
-	};
 
 	var formData  = new FormData();
 
@@ -252,7 +249,17 @@ export const changePassword = () => (dispatch) => {
 	for(var name in data) {
 		formData.append(name, data[name]);
 	}
-	console.log('changePassword formData ', formData);
+
+	fetchAPI('/api/v1/rest-auth/password/change/', formData).then(response => {
+		console.log('response ', response);
+	  if (response.ok) {
+	    return response;
+	  }
+	}).catch(error => {
+		console.log('error ', JSON.stringify(error.message));
+	});
+
+	return;
 
 	const headers = {
 		'Authorization': `Token ${token}`,
@@ -268,11 +275,62 @@ export const changePassword = () => (dispatch) => {
 				console.log('successfully changed password');
 				return res.json();
 			} else {
+				console.log('Change password res 1 ', res);
 				console.log('error changing password');
 			}
 		})
 		.then(res => {
-			console.log('Change password res ', res);
+			console.log('Change password res 2 ', res);
+		});
+};
+
+function fetchAPI(url, data, method = 'POST') {
+	const headers = {
+		'Authorization': `Token ${getAuthToken()}`,
+	};
+
+	return fetch(url, { headers, 'method': method, 'body': data })
+		.then(response => {
+			if (response.ok) {
+				const contentType = response.headers.get('Content-Type') || '';
+
+				if (contentType.includes('application/json')) {
+					return response.json().catch(error => {
+						return Promise.reject(new Error('Invalid JSON: ' + error.message));
+					});
+				}
+
+				if (contentType.includes('text/html')) {
+					return response.text().then(html => {
+						return {
+							'page_type': 'generic',
+							'html': html
+						};
+					}).catch(error => {
+						return Promise.reject(new Error('HTML error: ' + error.message));
+					});
+				}
+
+				return Promise.reject(new Error('Invalid content type: ' + contentType));
+			}
+
+			if (response.status === 404) {
+				return Promise.reject(new Error('Page not found: ' + url));
+			}
+
+			return response.json().then(res => {
+				// if the response is ok but the server rejected the request, e.g. because of a wrong password, we want to display the reason
+				// the information is contained in the json()
+				// there may be more than one error
+				let errors = [];
+				Object.keys(res).forEach((key) => {
+					errors.push(`${key}: ${res[key]}`);
+				});
+				return Promise.reject(new Error(errors)
+				);
+			});
+		}).catch(error => {
+			return Promise.reject(new Error(error.message));
 		});
 };
 

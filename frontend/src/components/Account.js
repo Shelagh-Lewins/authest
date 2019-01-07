@@ -4,7 +4,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Row, Col, Link } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
 
 class Account extends Component {
 	constructor() {
@@ -15,6 +16,7 @@ class Account extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		console.log('account 1 ', nextProps.auth.isAuthenticated);
 		if(!nextProps.auth.isAuthenticated) {
 			this.props.history.push('/'); // if not logged in, redirect to Home
 		}
@@ -26,19 +28,17 @@ class Account extends Component {
 	}
 
 	componentDidMount() {
+		console.log('account 2 ', this.props.auth.isAuthenticated);
 		if(!this.props.auth.isAuthenticated) {
 			this.props.history.push('/');
 		}
-		console.log('url params ', this.props.match.params);
 	}
 
 	render() {
 		const { errors } = this.state;
-		// var csrftoken = this.getCookie('csrftoken');
+
 		return(
-
-			<a className="nav-link" href="/api/v1/password_change">Change password</a>
-
+			<Link to="/changepassword" className="nav-link">Change password</Link>
 		);
 	}
 }
