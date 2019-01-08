@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { forgotPassword, forgotPasswordEmailNotSent } from '../actions/authentication';
-import classnames from 'classnames';
+import { Container, Row, Col, Label, Input } from 'reactstrap';
+import ValidatedForm from './ValidatedForm.js';
 
 class ForgotPassword extends Component {
 	constructor() {
@@ -21,11 +22,6 @@ class ForgotPassword extends Component {
 	componentWillReceiveProps(nextProps) {
 		if(nextProps.auth.isAuthenticated) {
 			this.props.history.push('/');
-		}
-		if(nextProps.errors) {
-			this.setState({
-				'errors': nextProps.errors
-			});
 		}
 	}
 
@@ -51,32 +47,43 @@ class ForgotPassword extends Component {
 	}
 
 	render() {
-		const { errors } = this.state;
 		return(
-			<div className="container" style={ { 'marginTop': '50px', 'width': '700px' } }>
-				<h2 style={ { 'marginBottom': '40px' } }>Forgot password?</h2>
-				<form onSubmit={ this.handleSubmit }>
-					<div className="form-group">
-						<input
-							type="email"
-							placeholder="Email address"
-							className={classnames('form-control form-control-lg', {
-								'is-invalid': errors.email
-							})}
-							name="email"
-							onChange={ this.handleInputChange }
-							value={ this.state.email }
-						/>
-						{errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
-					</div>
-					<div className="form-group">
-						<button type="submit" className="btn btn-primary">
+			<Container>
+				<h2>Forgot your password?</h2>
+				<p>Enter your email address. A reset password link will be emailed to you.</p>
+				<ValidatedForm onSubmit={ this.handleSubmit }>
+					<Row>
+						<Col>
+							<div className="form-group">
+								<Label for="email">Email address</Label>
+								<Input
+									type="email"
+									name="email"
+									required={true}
+									id="email"
+									onChange={ this.handleInputChange }
+									value={ this.state.email }
+									placeholder="Enter your email address"
+								/>
+								<div className='invalid-feedback' />
+							</div>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							<button type="submit" className="btn btn-primary">
 								Send me a password reset email
-						</button>
-					</div>
-				</form>
-				{this.props.auth.forgotPasswordEmailSent && (<div className="valid-feedback">An email has been sent to {this.state.email}</div>)}
-			</div>
+							</button>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							{this.props.errors.email && <div className="invalid-feedback" style={{ 'display': 'block' }}>{this.props.errors.email}</div>}
+						</Col>
+					</Row>
+				</ValidatedForm>
+				{this.props.auth.forgotPasswordEmailSent && (<div className="valid-feedback">An email has been sent to {this.state.email}. If you don't see it within a few minutes, please check your junk mail folder.</div>)}
+			</Container>
 		);
 	}
 }

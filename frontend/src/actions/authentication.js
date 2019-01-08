@@ -27,7 +27,6 @@ function removeAuthToken() {
 	localStorage.removeItem('jwtToken');
 }
 
-
 export const registerUser = (user, history) => dispatch => {
 	dispatch(clearErrors());
 
@@ -48,7 +47,7 @@ export const registerUser = (user, history) => dispatch => {
 		'data': formData,
 		'method': 'POST',
 	}).then(response => {
-	  	history.push('/');
+	  	history.push('/welcome');
 	    return response;
 	}).catch(error => {
 		return dispatch(getErrors({ 'registration': error.message }));
@@ -100,23 +99,19 @@ export const logoutUserComplete = token => {
 export const logoutUser = (history) => dispatch => {
 	dispatch(clearErrors());
 
-	return fetch('/api/v1/rest-auth/logout/', {
+	return fetchAPI({
+		'url': '/api/v1/rest-auth/logout/',
 		'method': 'POST',
-	})
-		.then(res => {
-			if(res.ok) {
-				removeAuthToken();
-				return res.json();
-			} else {
-				history.push('/');
-				return dispatch(getErrors({ 'logout user': 'Unable to logout' }));
-			}
-		})
-		.then(() => {
-			return dispatch(logoutUserComplete());
-		});
+		'useAuth': false,
+	}).then(response => {
+	  	history.push('/');
+	  	removeAuthToken();
+	    return dispatch(logoutUserComplete());
+	}).catch(error => {
+		return dispatch(getErrors({ 'logout user': 'Unable to logout' }));
+	});
 };
-// TODO parameterise api path
+
 ///////////////////////////////
 // get user info
 // TODO rebuild as saga with login using state token
@@ -130,40 +125,19 @@ export const setUserInfo = user => {
 };
 
 export const getUserInfo = () => (dispatch) => {
-	const token = store.getState().auth.user.token;
-
-	if (!token) {
-		return;
-	}
-
-	const headers = {
-		'Authorization': `Token ${token}`,
-		'Accept': 'application/json',
-		'Content-Type': 'application/json',
-	};
-
-	return fetch('/api/v1/rest-auth/user/', {
-		headers,
+	return fetchAPI({
+		'url': '/api/v1/rest-auth/user/',
 		'method': 'GET',
-	})
-		.then(res => {
-			if(res.ok) {
-				return res.json();
-			} else {
-				return dispatch(getErrors({ 'get user info': 'Unable to get user info' }));
-			}
-		})
-		.then(user => {
-			if(!user) {
-				return;
-			}
-
-			return dispatch(setUserInfo({
-				'username': user.username,
-				'email': user.email,
-				'slug': user.slug,
-			}));
-		});
+		'useAuth': true,
+	}).then(user => {
+	  	return dispatch(setUserInfo({
+			'username': user.username,
+			'email': user.email,
+			'slug': user.slug,
+		}));
+	}).catch(error => {
+		return dispatch(getErrors({ 'get user info': 'Unable to get user info' }));
+	});
 };
 
 ///////////////////////////////
@@ -189,16 +163,16 @@ export const forgotPassword = (email) => dispatch => {
 		formData.append(name, email[name]);
 	}
 
-	return fetch('/api/v1/rest-auth/password/reset/', { 'method': 'POST', 'body': formData })
-		.then(res => {
-			return res.json();
-		})
-		.then(() => {
-			return dispatch(forgotPasswordEmailSent());
-		})
-		.catch(err => {
-			return dispatch(getErrors(err.response.data));
-		});
+	return fetchAPI({
+		'url': '/api/v1/rest-auth/password/reset/',
+		'data': formData,
+		'method': 'POST',
+		'useAuth': false,
+	}).then(response => {
+	   return dispatch(forgotPasswordEmailSent());
+	}).catch(error => {
+		return dispatch(getErrors(error.response.data));
+	});
 };
 
 export const resetPasswordComplete = (token) => {
@@ -221,7 +195,6 @@ export const changePassword = (data) => (dispatch) => {
 		formData.append(name, data[name]);
 	}
 
-	console.log('changePassword action 2');
 	return fetchAPI({
 		'url': '/api/v1/rest-auth/password/change/',
 		'data': formData,

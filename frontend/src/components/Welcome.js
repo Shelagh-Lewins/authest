@@ -1,5 +1,4 @@
-// Account
-// user account settings, change password link
+// Shown after successful registration of a new user
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -7,7 +6,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 
-class Account extends Component {
+class Welcome extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -16,13 +15,13 @@ class Account extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(!nextProps.auth.isAuthenticated) {
-			this.props.history.push('/'); // if not logged in, redirect to Home
+		if(nextProps.auth.isAuthenticated) {
+			this.props.history.push('/'); // if logged in, redirect to Home
 		}
 	}
 
 	componentDidMount() {
-		if(!this.props.auth.isAuthenticated) {
+		if(this.props.auth.isAuthenticated) {
 			this.props.history.push('/');
 		}
 	}
@@ -30,10 +29,11 @@ class Account extends Component {
 	render() {
 		return(
 			<Container>
-				<h2>Account management</h2>
+				<h2>Welcome to My Top Tens</h2>
+				<p>Your account has been created. Click the link below to login.</p>
 				<Row>
 					<Col>
-						<Link to="/changepassword" className="nav-link">Change password</Link>
+						<Link to="/login" className="nav-link">Login</Link>
 					</Col>
 				</Row>
 			</Container>
@@ -41,7 +41,7 @@ class Account extends Component {
 	}
 }
 
-Account.propTypes = {
+Welcome.propTypes = {
 	'auth': PropTypes.object.isRequired,
 	'errors': PropTypes.object.isRequired
 };
@@ -51,4 +51,4 @@ const mapStateToProps = (state) => ({
 	'errors': state.errors
 });
 
-export  default connect(mapStateToProps,)(Account);
+export  default connect(mapStateToProps,)(Welcome);

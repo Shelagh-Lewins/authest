@@ -8,12 +8,12 @@ import { setCurrentUser, logoutUser, getAuthToken } from './actions/authenticati
 
 import Navbar from './components/Navbar';
 import Register from './components/Register';
+import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Home from './components/Home';
 import Account from './components/Account';
 import ForgotPassword from './components/ForgotPassword';
 import ChangePassword from './components/ChangePassword';
-
 // import ResetPassword from './components/ResetPassword';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -40,6 +40,7 @@ class App extends Component {
 						<Route exact path="/" component={ Home } />
 						<div className="container">
 							<Route exact path="/register" component={ Register } />
+							<Route exact path="/welcome" component={ Welcome } />
 							<Route exact path="/login" component={ Login } />
 							<Route exact path="/forgotpassword" component={ ForgotPassword } />
 							<Route exact path="/account" component={ Account } />

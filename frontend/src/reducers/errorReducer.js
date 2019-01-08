@@ -40,7 +40,6 @@ export default function(state = initialState, action ) {
 		}
 
 		case CLEAR_ERRORS: {
-			console.log('clearErrors reducer');
 			return {};
 		}
 
