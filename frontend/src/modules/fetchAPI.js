@@ -14,7 +14,6 @@ export default function fetchAPI({ url, data, method = 'GET', useAuth = false })
 		.then(response => {
 			// fetch returns ok true / false in most situations
 			// true is a successful response
-			console.log('internal response ', response);
 			if (response.ok) {
 				const contentType = response.headers.get('Content-Type') || '';
 

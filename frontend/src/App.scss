@@ -1,12 +1,24 @@
 @import "./variables";
 
-.form-feedback {
+.valid-feedback {
+	display: block;
+	color: $color-valid;
+	font-size: 80%;
+	margin-top: .25rem;
+	width: 100%;
+
+	&::before {
+		content: "\2714 ";
+	}
+}
+
+.invalid-feedback {
 	color: $color-invalid;
 	font-size: 80%;
 	margin-top: .25rem;
 	width: 100%;
 
-	ul {
-		list-style-type: none;
+	&::before {
+		content: "\2718 ";
 	}
 }

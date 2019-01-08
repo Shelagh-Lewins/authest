@@ -7,8 +7,8 @@ import {
 	FORGOT_PASSWORD_EMAIL_NOT_SENT,
 	FORGOT_PASSWORD_EMAIL_SENT,
 	RESET_PASSWORD_COMPLETE,
-	CHANGE_PASSWORD_COMPLETE,
-	CHANGE_PASSWORD_STARTED
+	PASSWORD_NOT_CHANGED,
+	CHANGE_PASSWORD_COMPLETE
 } from '../actions/authentication';
 import isEmpty from '../is-empty';
 
@@ -67,7 +67,7 @@ export default function(state = initialState, action ) {
 			}, state);
 		}
 
-		case CHANGE_PASSWORD_STARTED: {
+		case PASSWORD_NOT_CHANGED: {
 			return updeep({
 				'changePasswordComplete': false,
 				'errors': {}

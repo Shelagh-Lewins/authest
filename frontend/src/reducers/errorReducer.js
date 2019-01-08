@@ -1,6 +1,21 @@
 // errorReducer.js
 
-import { GET_ERRORS } from '../actions/types';
+const GET_ERRORS = 'GET_ERRORS';
+const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
+export const getErrors = error => {
+	// error is an object, e.g. { 'registration': error.message }
+	return {
+		'type': GET_ERRORS,
+		'payload': error,
+	};
+};
+
+export const clearErrors = () => {
+	return {
+		'type': CLEAR_ERRORS,
+	};
+};
 
 var updeep = require('updeep');
 
@@ -22,6 +37,11 @@ export default function(state = initialState, action ) {
 			});
 
 			return updeep(errors, {}); // clear any existing errors
+		}
+
+		case CLEAR_ERRORS: {
+			console.log('clearErrors reducer');
+			return {};
 		}
 
 		default: 

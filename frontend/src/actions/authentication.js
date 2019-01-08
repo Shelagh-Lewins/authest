@@ -2,17 +2,17 @@
 
 import store from '../store';
 import fetchAPI from '../modules/fetchAPI';
+import { getErrors, clearErrors } from '../reducers/errorReducer';
 
 // definte all action creators up front so you can see them
-export const GET_ERRORS = 'GET_ERRORS';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const LOGOUT_USER_COMPLETE = 'LOGOUT_USER_COMPLETE';
 export const SET_USER_INFO = 'SET_USER_INFO';
 export const FORGOT_PASSWORD_EMAIL_SENT = 'FORGOT_PASSWORD_EMAIL_SENT';
 export const FORGOT_PASSWORD_EMAIL_NOT_SENT = 'FORGOT_PASSWORD_EMAIL_NOT_SENT';
 export const RESET_PASSWORD_COMPLETE = 'RESET_PASSWORD_COMPLETE';
+export const PASSWORD_NOT_CHANGED = 'PASSWORD_NOT_CHANGED';
 export const CHANGE_PASSWORD_COMPLETE = 'CHANGE_PASSWORD_COMPLETE';
-export const CHANGE_PASSWORD_STARTED = 'CHANGE_PASSWORD_STARTED';
 
 // Side effects Services
 export const getAuthToken = () => {
@@ -29,6 +29,8 @@ function removeAuthToken() {
 
 
 export const registerUser = (user, history) => dispatch => {
+	dispatch(clearErrors());
+
 	var formData  = new FormData();
 
 	// Push our data into our FormData object
@@ -49,16 +51,15 @@ export const registerUser = (user, history) => dispatch => {
 	  	history.push('/');
 	    return response;
 	}).catch(error => {
-		dispatch({
-			'type': GET_ERRORS,
-			'payload': { 'registration': error.message },
-		});
+		return dispatch(getErrors({ 'registration': error.message }));
 	});
 };
 
 // TODO rework auth as a saga with token refresh
 // https://github.com/redux-saga/redux-saga/issues/14
 export const loginUser = (user, history) => dispatch => {
+	dispatch(clearErrors());
+
 	var formData  = new FormData();
 
 	// Push our data into our FormData object
@@ -78,10 +79,7 @@ export const loginUser = (user, history) => dispatch => {
 		// after store has been updated with token, we can query the server for current user info
 		return store.dispatch(getUserInfo());
 	}).catch(error => {
-		dispatch({
-			'type': GET_ERRORS,
-			'payload': { 'authentication': 'Unable to log in with the provided credentials, please try again.' },
-		});
+		return dispatch(getErrors({ 'authentication': 'Unable to log in with the provided credentials, please try again.' }));
 	});
 };
 
@@ -100,6 +98,8 @@ export const logoutUserComplete = token => {
 };
 
 export const logoutUser = (history) => dispatch => {
+	dispatch(clearErrors());
+
 	return fetch('/api/v1/rest-auth/logout/', {
 		'method': 'POST',
 	})
@@ -109,11 +109,7 @@ export const logoutUser = (history) => dispatch => {
 				return res.json();
 			} else {
 				history.push('/');
-
-				dispatch({
-					'type': GET_ERRORS,
-					'payload': { 'logout user': 'Unable to logout' }
-				});
+				return dispatch(getErrors({ 'logout user': 'Unable to logout' }));
 			}
 		})
 		.then(() => {
@@ -154,10 +150,7 @@ export const getUserInfo = () => (dispatch) => {
 			if(res.ok) {
 				return res.json();
 			} else {
-				dispatch({
-					'type': GET_ERRORS,
-					'payload': { 'get user info': 'Unable to get user info' }
-				});
+				return dispatch(getErrors({ 'get user info': 'Unable to get user info' }));
 			}
 		})
 		.then(user => {
@@ -188,6 +181,8 @@ export const forgotPasswordEmailSent = () => {
 };
 
 export const forgotPassword = (email) => dispatch => {
+	dispatch(clearErrors());
+
 	var formData  = new FormData();
 
 	for(var name in email) {
@@ -202,10 +197,7 @@ export const forgotPassword = (email) => dispatch => {
 			return dispatch(forgotPasswordEmailSent());
 		})
 		.catch(err => {
-			dispatch({
-				'type': GET_ERRORS,
-				'payload': err.response.data
-			});
+			return dispatch(getErrors(err.response.data));
 		});
 };
 
@@ -219,6 +211,9 @@ export const resetPasswordComplete = (token) => {
 //////////////////////////////////
 // change password
 export const changePassword = (data) => (dispatch) => {
+	dispatch(clearErrors());
+	dispatch(passwordNotChanged());
+
 	var formData  = new FormData();
 
 	// Push our data into our FormData object
@@ -226,31 +221,23 @@ export const changePassword = (data) => (dispatch) => {
 		formData.append(name, data[name]);
 	}
 
-	dispatch({
-		'type': CHANGE_PASSWORD_STARTED,
-	});
-
+	console.log('changePassword action 2');
 	return fetchAPI({
 		'url': '/api/v1/rest-auth/password/change/',
 		'data': formData,
 		'method': 'POST',
 		'useAuth': true,
 	}).then(response => {
-	  dispatch({
-			'type': CHANGE_PASSWORD_COMPLETE,
-		});
+	  dispatch(changePasswordComplete());
 	    return response;
 	}).catch(error => {
-		dispatch({
-			'type': GET_ERRORS,
-			'payload': { 'changePassword': error.message },
-		});
+		return dispatch(getErrors({ 'changePassword': error.message }));
 	});
 };
 
-export const changePasswordStarted = (token) => {
+export const passwordNotChanged = token => {
 	return {
-		'type': CHANGE_PASSWORD_STARTED,
+		'type': PASSWORD_NOT_CHANGED,
 	};
 };
 

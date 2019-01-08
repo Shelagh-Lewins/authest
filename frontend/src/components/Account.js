@@ -34,7 +34,13 @@ class Account extends Component {
 
 	render() {
 		return(
-			<Link to="/changepassword" className="nav-link">Change password</Link>
+			<Container>
+				<Row>
+					<Col>
+						<Link to="/changepassword" className="nav-link">Change password</Link>
+					</Col>
+				</Row>
+			</Container>
 		);
 	}
 }

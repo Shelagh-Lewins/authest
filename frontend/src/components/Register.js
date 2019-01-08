@@ -95,7 +95,7 @@ class Register extends Component {
 								/>
 								<div className='invalid-feedback' />
 								<small className='form-text text-muted'>
-									<p>You will use your email addres to login. It will not be seen by other users.</p>
+									<p>You will use your email address to login. It will not be seen by other users.</p>
 								</small>
 							</div>
 						</Col>
@@ -173,7 +173,7 @@ class Register extends Component {
 					</Row>
 	        <Row>
 						<Col>
-							{this.props.errors.registration && <div className="form-feedback " style={{ 'display': 'block' }}><p>{this.props.errors.registration}</p></div>}
+							{this.props.errors.registration && <div className="invalid-feedback " style={{ 'display': 'block' }}>{this.props.errors.registration}</div>}
 						</Col>
 					</Row>
 	      </ValidatedForm>

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { changePassword } from '../actions/authentication';
+import { changePassword, passwordNotChanged } from '../actions/authentication';
 import { Container, Row, Col, Label, Input } from 'reactstrap';
 import ValidatedForm from './ValidatedForm.js';
 
@@ -28,6 +28,7 @@ class ChangePassword extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
+		console.log('submit changePassword');
 		const data = {
 			'old_password': this.state.old_password,
 			'new_password1': this.state.new_password,
@@ -61,8 +62,8 @@ class ChangePassword extends Component {
 			<Container>
 				<h2>Change your password</h2>
 				<ValidatedForm onSubmit={ this.handleSubmit } inputsmustmatch={ {
-					'input1': 'password',
-					'input2': 'password_confirm',
+					'input1': 'new_password',
+					'input2': 'new_password_confirm',
 					'message': 'New passwords must match',
 				} }>
 					<Row>
@@ -84,7 +85,6 @@ class ChangePassword extends Component {
 							</div>
 						</Col>
 					</Row>
-
 					<Row>
 						<Col>
 							<div className="form-group">
@@ -138,11 +138,11 @@ class ChangePassword extends Component {
 					</Row>
 	        <Row>
 						<Col>
-							{this.props.errors.changePassword && <div className="form-feedback " style={{ 'display': 'block' }}><p>{this.props.errors.changePassword}</p></div>}
+							{this.props.errors.changePassword && <div className="invalid-feedback" style={{ 'display': 'block' }}>{this.props.errors.changePassword}</div>}
 						</Col>
 					</Row>
 	      </ValidatedForm>
-	      {this.props.auth.changePasswordComplete && (<div className="feedback">Your new password has been saved</div>)}
+	      {this.props.auth.changePasswordComplete && (<div className="valid-feedback">Your new password has been saved</div>)}
 			</Container>
 		);
 	}
@@ -150,7 +150,7 @@ class ChangePassword extends Component {
 
 ChangePassword.propTypes = {
 	'changePassword': PropTypes.func.isRequired,
-	'changePasswordComplete': PropTypes.func.isRequired,
+	'passwordNotChanged': PropTypes.func.isRequired,
 	'auth': PropTypes.object.isRequired,
 	'errors': PropTypes.object.isRequired
 };
@@ -160,4 +160,4 @@ const mapStateToProps = state => ({
 	'errors': state.errors
 });
 
-export default connect(mapStateToProps,{ changePassword })(withRouter(ChangePassword));
+export default connect(mapStateToProps,{ changePassword, passwordNotChanged })(withRouter(ChangePassword));

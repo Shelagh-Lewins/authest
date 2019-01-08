@@ -75,7 +75,7 @@ class ForgotPassword extends Component {
 						</button>
 					</div>
 				</form>
-				{this.props.auth.forgotPasswordEmailSent && (<div className="feedback">An email has been sent to {this.state.email}</div>)}
+				{this.props.auth.forgotPasswordEmailSent && (<div className="valid-feedback">An email has been sent to {this.state.email}</div>)}
 			</div>
 		);
 	}
