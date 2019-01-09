@@ -39,7 +39,7 @@ export function fetchLists() {
 		dispatch(fetchListsStarted());
 
 		let headers = { 'Content-Type': 'application/json' };
-		console.log('fetch lists');
+
 		fetch('/api/v1/lists/lists/', { headers, })
 			.then(handleFetchErrors)
 			.then(res => {
