@@ -6,7 +6,7 @@ const initialItemsState = {
 	'error': null,
 };
 
-export function items(state = initialItemsState, action) {
+export default function items(state = initialItemsState, action) {
 	switch (action.type) {
 		case 'RECEIVE_ENTITIES': {
 			const { entities } = action.payload;

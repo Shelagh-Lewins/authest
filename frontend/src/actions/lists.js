@@ -39,8 +39,8 @@ export function fetchLists() {
 		dispatch(fetchListsStarted());
 
 		let headers = { 'Content-Type': 'application/json' };
-
-		fetch('/api/v1/lists/', { headers, })
+		console.log('fetch lists');
+		fetch('/api/v1/lists/lists/', { headers, })
 			.then(handleFetchErrors)
 			.then(res => {
 				const normalizedData = normalize(res, [listSchema]);
@@ -109,12 +109,6 @@ export const setListIsPublic = ({ id, is_public }) => {
 			.then(res => res.json())
 			.then(res => { // res is the entire updated list object
 				dispatch(setListIsPublicSucceeded(res));
-
-				if (res.is_public) {
-					dispatch(publicTimerStart(res.id));
-				} else {
-					dispatch(publicTimerStop(res.id));
-				}
 			});
 	};
 };

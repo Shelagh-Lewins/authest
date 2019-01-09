@@ -12,10 +12,11 @@ const initialListsState = {
 
 // 'state' here is global state
 export const getSearchTerm = state => {
-	return state.page.searchTerm;
+	//return state.page.searchTerm;
 };
 
 export const getLists = state => {
+	console.log('getLists ', state);
 	return Object.keys(state.lists.things).map(id => {
 		return state.lists.things[id];
 	});
@@ -52,7 +53,7 @@ export const getGroupedAndFilteredLists = createSelector(
 // as 'items' for us is a specific thing, we need another name for the set of entities to be displayed i.e. the lists themselves
 // so those are globalState.lists.things
 // i.e. state.things here
-export function lists(state = initialListsState, action) {
+export default function lists(state = initialListsState, action) {
 	switch (action.type) {
 		case 'RECEIVE_ENTITIES': {
 			const { entities } = action.payload;
