@@ -1,0 +1,17 @@
+@import "../variables";
+
+.list-container {
+	border: 1px solid $color-panel-border;
+	border-radius: 8px;
+	margin: 0 8px 8px 0;
+	padding: 8px;
+
+	.list-header {
+		font-weight: bold;
+	}
+
+	// hide label but leave contents visible and entire label still readable
+	label {
+		font-size: 0;
+	}
+}

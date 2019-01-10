@@ -69,12 +69,6 @@ export function filterLists(searchTerm) {
 }
 
 export const createList = list => dispatch => {
-	/* let headers = { 'Content-Type': 'application/json' };
-	let body = JSON.stringify(list);
-	return fetch('/api/lists/', { headers, 'method': 'POST', body })
-		.then(res => res.json())
-		.then(list => dispatch(createListSucceeded(list))); */
-
 	return fetchAPI({
 		'url': '/api/v1/content/lists/',
 		'data': JSON.stringify(list),
@@ -98,19 +92,9 @@ export function createListSucceeded(list) {
 }
 
 export const deleteList = id => dispatch => {
-	/* return (dispatch, getState) => {
-		let headers = { 'Content-Type': 'application/json' };
-
-		return fetch(`/api/lists/${id}/`, { headers, 'method': 'DELETE' })
-			.then(res => {
-				dispatch(deleteListSucceeded(id));
-			});
-	}; */
-
 	return fetchAPI({
 		'url': `/api/v1/content/lists/${id}/`,
 		'method': 'DELETE',
-		'headers': { 'Content-Type': 'application/json' },
 	}).then(response => {
 	    return dispatch(deleteListSucceeded(id));
 	}).catch(error => {
@@ -128,19 +112,9 @@ export function deleteListSucceeded(id) {
 }
 
 export const setListIsPublic = ({ id, is_public }) => dispatch => {
-	/* return (dispatch, getState) => {
-		let headers = { 'Content-Type': 'application/json' };
-		let body = JSON.stringify({ is_public });
-
-		return fetch(`/api/lists/${id}/`, { headers, 'method': 'PATCH', body })
-			.then(res => res.json())
-			.then(res => { // res is the entire updated list object
-				dispatch(setListIsPublicSucceeded(res));
-			});
-	}; */
-
 	return fetchAPI({
 		'url': `/api/v1/content/lists/${id}/`,
+		'headers': { 'Content-Type': 'application/json' },
 		'data': JSON.stringify({ is_public }),
 		'method': 'PATCH',
 	}).then(response => {

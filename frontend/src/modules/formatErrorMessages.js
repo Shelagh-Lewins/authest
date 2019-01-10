@@ -14,9 +14,13 @@
 export default function (errors) {
 	let messageArray = [];
 	Object.keys(errors).forEach((key) => {
-		errors[key].map((item) => { // eslint-disable-line array-callback-return
-			messageArray.push(item);
-		});
+		if (typeof errors[key] === 'string') {
+			messageArray.push(errors[key]); // plain string error
+		} else { // arary of errors
+			errors[key].map((item) => { // eslint-disable-line array-callback-return
+				messageArray.push(item);
+			});
+		}
 	});
 
 	const message = messageArray.join(' ');

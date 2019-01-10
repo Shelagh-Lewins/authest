@@ -14,11 +14,10 @@ import Home from './components/Home';
 import Account from './components/Account';
 import ForgotPassword from './components/ForgotPassword';
 import ChangePassword from './components/ChangePassword';
-// import ResetPassword from './components/ResetPassword';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
-// note that the Django template pages reset password load the bootstrap css from static/bootstrap
+// note that the Django template pages reset password loads the bootstrap css from static/bootstrap
 
 // check if user is already logged in
 if(getAuthToken()) {

@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
+import ListsPage from './ListsPage';
+import ItemsPage from './ItemsPage';
+import SelectList from './SelectList';
 
 import * as lists from '../actions/lists';
 import * as items from '../actions/items';
@@ -12,6 +15,7 @@ import { getItemsByListId } from '../reducers/itemsReducer';
 
 import FlashMessage from './FlashMessage';
 import formatErrorMessages from '../modules/formatErrorMessages';
+import isEmpty from '../modules/isEmpty';
 import { clearErrors } from '../reducers/errorReducer';
 
 class Home extends Component {
@@ -28,6 +32,7 @@ class Home extends Component {
 	}
 
 	onCreateList = ({ title, description }) => {
+		console.log('onCreateList firing');
 		this.props.dispatch(lists.createList({ title, description }));
 	}
 
@@ -54,18 +59,35 @@ class Home extends Component {
 	render() {
 		return (
 			<Container>
-				{this.props.errors &&
+				<Row>
+					<Col>
+						{!isEmpty(this.props.errors) &&
 					<FlashMessage
 						message={formatErrorMessages(this.props.errors)}
 						type="error"
 						onClick={this.onCloseFlashMessage}
 					/>}
-				<h2>This is the Home page</h2>
-				<Row>
-					<Col>
-						Nothing is happening here yet.
 					</Col>
 				</Row>
+				<SelectList
+					lists={this.props.lists}
+					onCurrentListChange={this.onCurrentListChange}
+					currentListId={this.props.currentListId}
+				/>
+				<ListsPage
+					lists={this.props.lists}
+					onSearch={this.onSearch}
+					onCreateList={this.onCreateList}
+					onIsPublicChange={this.onIsPublicChange}
+					onDeleteList={this.onDeleteList}
+					isLoading={this.props.isLoading}
+				/>
+				<ItemsPage
+					items={this.props.items}
+					onCreateItem={this.onCreateItem}
+					currentListId={this.props.currentListId}
+					onDeleteItem={this.onDeleteItem}
+				/>
 			</Container>
 		);
 	}

@@ -1,0 +1,23 @@
+@import "../variables";
+
+.item-container {
+	border: 1px solid $color-panel-border;
+	border-radius: 8px;
+	margin: 0 8px 8px 0;
+	padding: 8px;
+
+	.item-header {
+		font-weight: bold;
+	}
+
+	// hide label but leave contents visible and entire label still readable
+	label {
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+}

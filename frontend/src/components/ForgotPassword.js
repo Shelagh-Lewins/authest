@@ -100,4 +100,4 @@ const mapStateToProps = (state) => ({
 	'errors': state.errors
 });
 
-export  default connect(mapStateToProps, { forgotPassword, forgotPasswordEmailNotSent })(ForgotPassword);
+export default connect(mapStateToProps, { forgotPassword, forgotPasswordEmailNotSent })(ForgotPassword);

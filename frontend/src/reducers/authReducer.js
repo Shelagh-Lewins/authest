@@ -10,7 +10,7 @@ import {
 	PASSWORD_NOT_CHANGED,
 	CHANGE_PASSWORD_COMPLETE
 } from '../actions/authentication';
-import isEmpty from '../is-empty';
+import isEmpty from '../modules/isEmpty';
 
 var updeep = require('updeep');
 

@@ -1,4 +1,4 @@
-// is-empty.js
+// check for a null, empty, undefined object
 
 const isEmpty = (value) => {
 	return (

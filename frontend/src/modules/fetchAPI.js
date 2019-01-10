@@ -35,7 +35,7 @@ export default function fetchAPI({ url, data, method = 'GET', useAuth = false, h
 					});
 				}
 
-				return Promise.reject(new Error('Invalid content type: ' + contentType));
+				return;
 			} else {
 				// ok == false means some problem to display
 				// even though no error was returned
