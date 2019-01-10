@@ -1,3 +1,12 @@
+import {
+	RECEIVE_ENTITIES,
+} from '../actions/lists';
+
+import {
+	CREATE_ITEM_SUCCEEDED,
+	DELETE_ITEM_SUCCEEDED
+} from '../actions/items';
+
 var updeep = require('updeep');
 
 const initialItemsState = {
@@ -8,7 +17,7 @@ const initialItemsState = {
 
 export default function items(state = initialItemsState, action) {
 	switch (action.type) {
-		case 'RECEIVE_ENTITIES': {
+		case RECEIVE_ENTITIES: {
 			const { entities } = action.payload;
 			if (entities && entities.items) {
 				return updeep({ 'things': entities.items, 'isLoading': false }, state);
@@ -17,12 +26,12 @@ export default function items(state = initialItemsState, action) {
 			return state;
 		}
 
-		case 'CREATE_ITEM_SUCCEEDED': {
+		case CREATE_ITEM_SUCCEEDED: {
 			const item = action.payload.item;
 			return updeep({ 'things': { [item.id]: item } }, state);
 		}
 
-		case 'DELETE_ITEM_SUCCEEDED': {
+		case DELETE_ITEM_SUCCEEDED: {
 			return updeep({ 'things': updeep.omit([action.payload.id]) }, state);
 		}
 

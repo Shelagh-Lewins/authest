@@ -40,7 +40,7 @@ export default function(state = initialState, action ) {
 		}
 
 		case CLEAR_ERRORS: {
-			return {};
+			return null;
 		}
 
 		default: 

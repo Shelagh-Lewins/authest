@@ -1,5 +1,18 @@
 import { createSelector } from 'reselect';
 import { LIST_IS_PUBLIC_VALUES } from '../constants';
+import {
+	RECEIVE_ENTITIES,
+	FETCH_LISTS_STARTED,
+	FETCH_LISTS_FAILED,
+	CREATE_LIST_SUCCEEDED,
+	DELETE_LIST_SUCCEEDED,
+	SET_LIST_IS_PUBLIC_SUCCEEDED
+} from '../actions/lists';
+
+import {
+	CREATE_ITEM_SUCCEEDED,
+	DELETE_ITEM_SUCCEEDED
+} from '../actions/items';
 
 var updeep = require('updeep');
 
@@ -12,11 +25,10 @@ const initialListsState = {
 
 // 'state' here is global state
 export const getSearchTerm = state => {
-	//return state.page.searchTerm;
+	return state.page.searchTerm;
 };
 
 export const getLists = state => {
-	console.log('getLists ', state);
 	return Object.keys(state.lists.things).map(id => {
 		return state.lists.things[id];
 	});
@@ -55,7 +67,7 @@ export const getGroupedAndFilteredLists = createSelector(
 // i.e. state.things here
 export default function lists(state = initialListsState, action) {
 	switch (action.type) {
-		case 'RECEIVE_ENTITIES': {
+		case RECEIVE_ENTITIES: {
 			const { entities } = action.payload;
 			if (entities && entities.lists) {
 				return updeep({ 'things': entities.lists, 'isLoading': false }, state);
@@ -64,24 +76,24 @@ export default function lists(state = initialListsState, action) {
 			return state;
 		}
 
-		case 'FETCH_LISTS_STARTED': {
+		case FETCH_LISTS_STARTED: {
 			return updeep({ 'isLoading': true }, state);
 		}
 
-		case 'FETCH_LISTS_FAILED': {
-			return updeep({ 'isLoading': false, 'error': action.payload }, state);
+		case FETCH_LISTS_FAILED: {
+			return updeep({ 'isLoading': false }, state);
 		}
 
-		case 'CREATE_LIST_SUCCEEDED': {
+		case CREATE_LIST_SUCCEEDED: {
 			const list = action.payload.list;
 			return updeep({ 'things': { [list.id]: list } }, state);
 		}
 
-		case 'DELETE_LIST_SUCCEEDED': {
+		case DELETE_LIST_SUCCEEDED: {
 			return updeep({ 'things': updeep.omit([action.payload.id]) }, state);
 		}
 
-		case 'SET_LIST_IS_PUBLIC_SUCCEEDED': {
+		case SET_LIST_IS_PUBLIC_SUCCEEDED: {
 			const listId = action.payload.id;
 
 			return updeep({ 'things': { [listId]: { 'is_public': action.payload.is_public } } }, state);
@@ -96,14 +108,7 @@ export default function lists(state = initialListsState, action) {
 			*/
 		}
 
-		case 'TIMER_INCREMENT': {
-			const listId = action.payload.id;
-			const update = { 'timer': state.things[listId].timer + 1 };
-
-			return updeep({ 'things': { [listId]: update } }, state);
-		}
-
-		case 'CREATE_ITEM_SUCCEEDED': {
+		case CREATE_ITEM_SUCCEEDED: {
 			const item = action.payload.item;
 
 			function addItem(items) {
@@ -113,7 +118,7 @@ export default function lists(state = initialListsState, action) {
 			return updeep.updateIn(`things.${item.list}.items`, addItem, state);
 		}
 
-		case 'DELETE_ITEM_SUCCEEDED': {
+		case DELETE_ITEM_SUCCEEDED: {
 			function deleteItem(items) {
 				const itemIndex = items.findIndex((item) => item === action.payload.itemId); 
 				let newItems = [].concat(items);

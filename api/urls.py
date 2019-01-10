@@ -14,5 +14,6 @@ urlpatterns = [
     	name='password_reset_confirm'),
     path('reset/done/', views.PasswordResetCompleteView.as_view(template_name='account/password_reset_complete.html'),
     	name='password_reset_complete'),
-    path('lists/', include('lists.endpoints')),
+    path('content/', include('lists.endpoints')),
+    # content is a path for lists, items etc found in the lists app
 ]

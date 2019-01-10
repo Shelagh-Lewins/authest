@@ -4,11 +4,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
-//const inititalState = {};
-
 const store = createStore(
 	rootReducer, 
-//	inititalState, 
+//	inititalState, // by not supplying initial state, we tell the store to use the defaults specified in the reducer
 	compose(applyMiddleware(thunk), 
 		window.__REDUX_DEVTOOLS_EXTENSION__&& window.__REDUX_DEVTOOLS_EXTENSION__()));
 

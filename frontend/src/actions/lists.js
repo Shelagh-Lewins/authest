@@ -1,5 +1,17 @@
+import fetchAPI from '../modules/fetchAPI';
+import { getErrors } from '../reducers/errorReducer';
 import { normalize, schema } from 'normalizr';
 // TODO add errors, fetchAPI
+
+// define action types up front so you can see them
+export const RECEIVE_ENTITIES = 'RECEIVE_ENTITIES';
+export const FETCH_LISTS_STARTED = 'FETCH_LISTS_STARTED';
+export const FETCH_LISTS_FAILED = 'FETCH_LISTS_FAILED';
+export const FILTER_LISTS = 'FILTER_LISTS';
+export const CREATE_LIST_SUCCEEDED = 'CREATE_LIST_SUCCEEDED';
+export const DELETE_LIST_SUCCEEDED = 'DELETE_LIST_SUCCEEDED';
+export const SET_LIST_IS_PUBLIC_SUCCEEDED = 'SET_LIST_IS_PUBLIC_SUCCEEDED';
+export const SET_CURRENT_LIST_ID = 'SET_CURRENT_LIST_ID';
 
 const itemSchema = new schema.Entity('items');
 const listSchema = new schema.Entity('lists', {
@@ -8,29 +20,20 @@ const listSchema = new schema.Entity('lists', {
 
 function receiveEntities(entities) {
 	return {
-		'type': 'RECEIVE_ENTITIES',
+		'type': RECEIVE_ENTITIES,
 		'payload': entities,
 	};
 }
 
-// return JSON if possible, otherwise throw error
-function handleFetchErrors(res) {
-	if (!res.ok) {
-		throw Error (res.statusText);
-	}
-	return res.json();
-}
-
 export function fetchListsStarted(is_public) {
 	return {
-		'type': 'FETCH_LISTS_STARTED',
+		'type': FETCH_LISTS_STARTED,
 	};
 }
 
-function fetchListsFailed(err) {
+function fetchListsFailed() {
 	return {
-		'type': 'FETCH_LISTS_FAILED',
-		'payload': err,
+		'type': FETCH_LISTS_FAILED
 	};
 }
 
@@ -38,70 +41,94 @@ export function fetchLists() {
 	return (dispatch, getState) => {
 		dispatch(fetchListsStarted());
 
-		let headers = { 'Content-Type': 'application/json' };
+		return fetchAPI({
+			'url': '/api/v1/content/lists/',
+			'method': 'GET',
+		}).then(response => {
+	    const normalizedData = normalize(response, [listSchema]);
 
-		fetch('/api/v1/lists/lists/', { headers, })
-			.then(handleFetchErrors)
-			.then(res => {
-				const normalizedData = normalize(res, [listSchema]);
+			if (!getState().page.currentListId) {
+				const defaultListId = response[0].id;
+				dispatch(setCurrentListId(defaultListId));
+			}
 
-				if (!getState().page.currentListId) {
-					const defaultListId = res[0].id;
-					dispatch(setCurrentListId(defaultListId));
-				}
-
-				return dispatch(receiveEntities(normalizedData));
-			})
-			.catch(err => dispatch(fetchListsFailed(err.message))); // book shows just function call, not dispatch, but that doesn't seem to work
+			return dispatch(receiveEntities(normalizedData));
+		}).catch(error => {
+			dispatch(fetchListsFailed());
+			console.log('error message ', error.message);
+			return dispatch(getErrors({ 'fetch lists': error.message }));
+		});
 	};
 }
 
 export function filterLists(searchTerm) {
 	return { 
-		'type': 'FILTER_LISTS',
+		'type': FILTER_LISTS,
 		'payload': { searchTerm },
 	};
 }
 
 export const createList = list => dispatch => {
-	let headers = { 'Content-Type': 'application/json' };
+	/* let headers = { 'Content-Type': 'application/json' };
 	let body = JSON.stringify(list);
 	return fetch('/api/lists/', { headers, 'method': 'POST', body })
 		.then(res => res.json())
-		.then(list => dispatch(createListSucceeded(list)));
+		.then(list => dispatch(createListSucceeded(list))); */
+
+	return fetchAPI({
+		'url': '/api/v1/content/lists/',
+		'data': JSON.stringify(list),
+		'method': 'POST',
+		'useAuth': true,
+		'headers': { 'Content-Type': 'application/json' },
+	}).then(response => {
+	    return dispatch(createListSucceeded(response));
+	}).catch(error => {
+		return dispatch(getErrors({ 'create list': error.message }));
+	});
 };
 
 export function createListSucceeded(list) {
 	return {
-		'type': 'CREATE_LIST_SUCCEEDED',
+		'type': CREATE_LIST_SUCCEEDED,
 		'payload': {
 			list
 		}
 	};
 }
 
-export const deleteList = (id) => {
-	return (dispatch, getState) => {
+export const deleteList = id => dispatch => {
+	/* return (dispatch, getState) => {
 		let headers = { 'Content-Type': 'application/json' };
 
 		return fetch(`/api/lists/${id}/`, { headers, 'method': 'DELETE' })
 			.then(res => {
 				dispatch(deleteListSucceeded(id));
 			});
-	};
+	}; */
+
+	return fetchAPI({
+		'url': `/api/v1/content/lists/${id}/`,
+		'method': 'DELETE',
+		'headers': { 'Content-Type': 'application/json' },
+	}).then(response => {
+	    return dispatch(deleteListSucceeded(id));
+	}).catch(error => {
+		return dispatch(getErrors({ 'delete list': error.message }));
+	});
 };
 
 export function deleteListSucceeded(id) {
 	return {
-		'type': 'DELETE_LIST_SUCCEEDED',
+		'type': DELETE_LIST_SUCCEEDED,
 		'payload': {
 			id
 		}
 	};
 }
 
-export const setListIsPublic = ({ id, is_public }) => {
-	return (dispatch, getState) => {
+export const setListIsPublic = ({ id, is_public }) => dispatch => {
+	/* return (dispatch, getState) => {
 		let headers = { 'Content-Type': 'application/json' };
 		let body = JSON.stringify({ is_public });
 
@@ -110,12 +137,22 @@ export const setListIsPublic = ({ id, is_public }) => {
 			.then(res => { // res is the entire updated list object
 				dispatch(setListIsPublicSucceeded(res));
 			});
-	};
+	}; */
+
+	return fetchAPI({
+		'url': `/api/v1/content/lists/${id}/`,
+		'data': JSON.stringify({ is_public }),
+		'method': 'PATCH',
+	}).then(response => {
+	    return dispatch(setListIsPublicSucceeded(response));
+	}).catch(error => {
+		return dispatch(getErrors({ 'set list is public': error.message }));
+	});
 };
 
 export function setListIsPublicSucceeded({ id, is_public }) {
 	return {
-		'type': 'SET_LIST_IS_PUBLIC_SUCCEEDED',
+		'type': SET_LIST_IS_PUBLIC_SUCCEEDED,
 		'payload': {
 			'id': id,
 			is_public
@@ -125,7 +162,7 @@ export function setListIsPublicSucceeded({ id, is_public }) {
 
 export function setCurrentListId(id) {
 	return {
-		'type': 'SET_CURRENT_LIST_ID',
+		'type': SET_CURRENT_LIST_ID,
 		'payload': {
 			id,
 		}

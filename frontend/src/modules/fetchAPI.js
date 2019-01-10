@@ -2,9 +2,10 @@
 // passes up useful errors to the calling function.
 // set useAuth to true for validating logged-in user: token will be sent in header
 import store from '../store';
+import formatErrorMessages from '../modules/formatErrorMessages';
 
-export default function fetchAPI({ url, data, method = 'GET', useAuth = false }) {
-	let headers = {};
+export default function fetchAPI({ url, data, method = 'GET', useAuth = false, headers = {} }) {
+	// let headers = {};
 
 	if (useAuth) {
 		headers.Authorization = `Token ${store.getState().auth.user.token}`;
@@ -52,15 +53,7 @@ export default function fetchAPI({ url, data, method = 'GET', useAuth = false })
 					// there may be more than one error, so join them into a single string.
 					// multiline display would be more elegant but this will do for now and makes all errors consistent (one message string)
 
-					let messageArray = [];
-					Object.keys(response).forEach((key) => {
-						response[key].map((item) => { // eslint-disable-line array-callback-return
-							messageArray.push(item);
-						});
-					});
-
-					const message = messageArray.join(' ');
-					return Promise.reject(new Error(message)
+					return Promise.reject(new Error(formatErrorMessages(response))
 					);
 				});
 			}

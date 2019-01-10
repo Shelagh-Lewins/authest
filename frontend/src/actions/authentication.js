@@ -1,10 +1,8 @@
-// authentication.js
-
 import store from '../store';
 import fetchAPI from '../modules/fetchAPI';
 import { getErrors, clearErrors } from '../reducers/errorReducer';
 
-// definte all action creators up front so you can see them
+// define action types up front so you can see them
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const LOGOUT_USER_COMPLETE = 'LOGOUT_USER_COMPLETE';
 export const SET_USER_INFO = 'SET_USER_INFO';
@@ -56,6 +54,7 @@ export const registerUser = (user, history) => dispatch => {
 
 // TODO rework auth as a saga with token refresh
 // https://github.com/redux-saga/redux-saga/issues/14
+// https://github.com/alvelig/redux-saga-auth
 export const loginUser = (user, history) => dispatch => {
 	dispatch(clearErrors());
 
