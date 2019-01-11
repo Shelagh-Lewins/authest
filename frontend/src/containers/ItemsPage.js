@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row } from 'reactstrap';
-import ItemsList from './ItemsList';
+import ItemsList from '../components/ItemsList';
 import { MAX_ITEMS_IN_LIST } from '../constants';
-import './Items.scss';
+import './ItemsPage.scss';
 
 class ItemsPage extends Component {
 	constructor(props) {

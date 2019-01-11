@@ -10,7 +10,7 @@ import Navbar from '../components/Navbar';
 import Register from '../components/Register';
 import Welcome from '../components/Welcome';
 import Login from '../components/Login';
-import Home from '../components/Home';
+import Home from '../containers/Home';
 import Account from '../components/Account';
 import ForgotPassword from '../components/ForgotPassword';
 import ChangePassword from '../components/ChangePassword';

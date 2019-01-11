@@ -6,14 +6,14 @@ import { Container, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import ListsPage from './ListsPage';
 import ItemsPage from './ItemsPage';
-import SelectList from './SelectList';
+import SelectList from '../components/SelectList';
 
 import * as lists from '../modules/lists';
 import * as items from '../modules/items';
 import { getGroupedAndFilteredLists } from '../modules/lists';
 import { getItemsByListId } from '../modules/items';
 
-import FlashMessage from './FlashMessage';
+import FlashMessage from '../components/FlashMessage';
 import formatErrorMessages from '../modules/formatErrorMessages';
 import isEmpty from '../modules/isEmpty';
 import { clearErrors } from '../modules/errors';
