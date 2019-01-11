@@ -2,7 +2,7 @@ import {
 	SET_CURRENT_LIST_ID,
 	DELETE_LIST_SUCCEEDED,
 	FILTER_LISTS,
-} from '../actions/lists';
+} from './lists';
 
 var updeep = require('updeep');
 

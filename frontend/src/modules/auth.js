@@ -1,16 +1,23 @@
+// authReducer.js
+
 import store from '../store';
 import fetchAPI from '../modules/fetchAPI';
-import { getErrors, clearErrors } from '../reducers/errorReducer';
+import { getErrors, clearErrors } from '../modules/errors';
+import isEmpty from '../modules/isEmpty';
 
-// define action types up front so you can see them
+//////////////////////////////////
+// Action creators
+
+// define action types so they are visible
+// and export them so other reducers can use them
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const LOGOUT_USER_COMPLETE = 'LOGOUT_USER_COMPLETE';
-export const SET_USER_INFO = 'SET_USER_INFO';
 export const FORGOT_PASSWORD_EMAIL_SENT = 'FORGOT_PASSWORD_EMAIL_SENT';
-export const FORGOT_PASSWORD_EMAIL_NOT_SENT = 'FORGOT_PASSWORD_EMAIL_NOT_SENT';
 export const RESET_PASSWORD_COMPLETE = 'RESET_PASSWORD_COMPLETE';
 export const PASSWORD_NOT_CHANGED = 'PASSWORD_NOT_CHANGED';
 export const CHANGE_PASSWORD_COMPLETE = 'CHANGE_PASSWORD_COMPLETE';
+export const SET_USER_INFO = 'SET_USER_INFO';
+export const FORGOT_PASSWORD_EMAIL_NOT_SENT = 'FORGOT_PASSWORD_EMAIL_NOT_SENT';
 
 // Side effects Services
 export const getAuthToken = () => {
@@ -219,4 +226,77 @@ export const changePasswordComplete = (token) => {
 	};
 };
 
+//////////////////////////////////
+// Reducer
+var updeep = require('updeep');
 
+const initialState = {
+	'isAuthenticated': false,
+	'forgotPasswordEmailSent': false,
+	'resetPasswordComplete': false,
+	'changePasswordComplete': false,
+	'user': {}
+};
+
+export default function(state = initialState, action ) {
+	switch(action.type) {
+		case SET_CURRENT_USER:
+			return updeep({
+				'isAuthenticated': !isEmpty(action.payload.token),
+				'user': updeep.constant({ 'token': action.payload.token }) // remove user info
+			}, state);
+
+		case SET_USER_INFO: // update user info
+			return updeep({
+				'user': {
+					'username': action.payload.username,
+					'email': action.payload.email,
+					'slug': action.payload.slug,
+				}
+			}, state);
+
+		case LOGOUT_USER_COMPLETE: {
+			return updeep({
+				'isAuthenticated': false,
+				'user': updeep.constant({}) // remove user profile
+			}, state);
+		}
+
+		case FORGOT_PASSWORD_EMAIL_NOT_SENT: {
+			return updeep({
+				'forgotPasswordEmailSent': false,
+				'resetPasswordComplete': false,
+			}, state);
+		}
+
+		case FORGOT_PASSWORD_EMAIL_SENT :{
+			return updeep({
+				'forgotPasswordEmailSent': true,
+				'resetPasswordComplete': false,
+			}, state);
+		}
+
+		case RESET_PASSWORD_COMPLETE: {
+			return updeep({
+				'forgotPasswordEmailSent': false,
+				'resetPasswordComplete': true,
+			}, state);
+		}
+
+		case PASSWORD_NOT_CHANGED: {
+			return updeep({
+				'changePasswordComplete': false,
+				'errors': {}
+			}, state);
+		}
+
+		case CHANGE_PASSWORD_COMPLETE: {
+			return updeep({
+				'changePasswordComplete': true,
+			}, state);
+		}
+
+		default: 
+			return state;
+	}
+}

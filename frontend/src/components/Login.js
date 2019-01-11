@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/authentication';
+import { loginUser } from '../modules/auth';
 import { Container, Row, Col, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import ValidatedForm from './ValidatedForm.js';

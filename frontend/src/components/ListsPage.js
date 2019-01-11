@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import ListsList from './ListsList';
-import '../stylesheets/lists.scss';
+import './Lists.scss';
 
 class ListsPage extends Component {
 	constructor(props) {

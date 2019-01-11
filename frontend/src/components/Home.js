@@ -8,15 +8,15 @@ import ListsPage from './ListsPage';
 import ItemsPage from './ItemsPage';
 import SelectList from './SelectList';
 
-import * as lists from '../actions/lists';
-import * as items from '../actions/items';
-import { getGroupedAndFilteredLists } from '../reducers/listsReducer';
-import { getItemsByListId } from '../reducers/itemsReducer';
+import * as lists from '../modules/lists';
+import * as items from '../modules/items';
+import { getGroupedAndFilteredLists } from '../modules/lists';
+import { getItemsByListId } from '../modules/items';
 
 import FlashMessage from './FlashMessage';
 import formatErrorMessages from '../modules/formatErrorMessages';
 import isEmpty from '../modules/isEmpty';
-import { clearErrors } from '../reducers/errorReducer';
+import { clearErrors } from '../modules/errors';
 
 class Home extends Component {
 	componentDidMount() {

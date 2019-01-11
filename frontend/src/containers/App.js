@@ -3,19 +3,19 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './store';
-import { setCurrentUser, logoutUser, getAuthToken } from './actions/authentication';
+import store from '../store';
+import { setCurrentUser, logoutUser, getAuthToken } from '../modules/auth';
 
-import Navbar from './components/Navbar';
-import Register from './components/Register';
-import Welcome from './components/Welcome';
-import Login from './components/Login';
-import Home from './components/Home';
-import Account from './components/Account';
-import ForgotPassword from './components/ForgotPassword';
-import ChangePassword from './components/ChangePassword';
+import Navbar from '../components/Navbar';
+import Register from '../components/Register';
+import Welcome from '../components/Welcome';
+import Login from '../components/Login';
+import Home from '../components/Home';
+import Account from '../components/Account';
+import ForgotPassword from '../components/ForgotPassword';
+import ChangePassword from '../components/ChangePassword';
 
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 // note that the Django template pages reset password loads the bootstrap css from static/bootstrap
 

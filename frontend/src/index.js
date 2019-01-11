@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -18,7 +18,7 @@ const renderApp = () => {
 };
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {
-	module.hot.accept('./App', renderApp);
+	module.hot.accept('./containers/App', renderApp);
 }
 
 renderApp();

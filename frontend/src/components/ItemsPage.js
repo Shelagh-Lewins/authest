@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ItemsList from './ItemsList';
 import { MAX_ITEMS_IN_LIST } from '../constants';
-import '../stylesheets/items.scss';
+import './Items.scss';
 
 class ItemsPage extends Component {
 	constructor(props) {

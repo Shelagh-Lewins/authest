@@ -2,11 +2,11 @@
 
 // import the partial reducers
 import { combineReducers } from 'redux';
-import errors from './errorReducer';
-import auth from './authReducer';
-import page from './pageReducer';
-import lists from './listsReducer';
-import items from './itemsReducer';
+import errors from './errors';
+import auth from './auth';
+import page from './page';
+import lists from './lists';
+import items from './items';
 // by importing the actual reducer as the default, the state of each is initialised
 
 export default combineReducers({

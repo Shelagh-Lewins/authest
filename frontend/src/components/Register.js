@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { registerUser } from '../actions/authentication';
+import { registerUser } from '../modules/auth';
 import { Container, Row, Col, Label, Input } from 'reactstrap';
 import ValidatedForm from './ValidatedForm.js';
 

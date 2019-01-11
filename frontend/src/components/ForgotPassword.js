@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { forgotPassword, forgotPasswordEmailNotSent } from '../actions/authentication';
+import { forgotPassword, forgotPasswordEmailNotSent } from '../modules/auth';
 import { Container, Row, Col, Label, Input } from 'reactstrap';
 import ValidatedForm from './ValidatedForm.js';
 

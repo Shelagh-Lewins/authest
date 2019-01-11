@@ -1,5 +1,5 @@
 import fetchAPI from '../modules/fetchAPI';
-import { getErrors } from '../reducers/errorReducer';
+import { getErrors } from '../modules/errors';
 import { normalize, schema } from 'normalizr';
 // TODO add errors, fetchAPI
 
