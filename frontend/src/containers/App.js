@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../store';
-import { setCurrentUser, logoutUser, getAuthToken } from '../modules/auth';
+import { setCurrentUser, getUserInfo, logoutUser, getAuthToken } from '../modules/auth';
 
 import Navbar from '../components/Navbar';
 import Register from '../components/Register';
@@ -22,6 +22,7 @@ import './App.scss';
 // check if user is already logged in
 if(getAuthToken()) {
 	store.dispatch(setCurrentUser(localStorage.jwtToken));
+	store.dispatch(getUserInfo());
 
 	const currentTime = Date.now() / 1000;
 	if(localStorage.jwtToken.exp < currentTime) {
