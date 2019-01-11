@@ -59,25 +59,29 @@ class Home extends Component {
 	render() {
 		return (
 			<div>
-			<Container>
-				<Row>
-					<Col>
-						{!isEmpty(this.props.errors) &&
-					<FlashMessage
-						message={formatErrorMessages(this.props.errors)}
-						type="error"
-						onClick={this.onCloseFlashMessage}
-					/>}
-					</Col>
-				</Row>
-			</Container>
-			<Container>
-				<SelectList
-					lists={this.props.lists}
-					onCurrentListChange={this.onCurrentListChange}
-					currentListId={this.props.currentListId}
-				/>
-			</Container>
+				<Container>
+					<Row>
+						<Col>
+							{!isEmpty(this.props.errors) &&
+						<FlashMessage
+							message={formatErrorMessages(this.props.errors)}
+							type="error"
+							onClick={this.onCloseFlashMessage}
+						/>}
+						</Col>
+					</Row>
+				</Container>
+				<Container>
+					<Row>
+						<Col>
+							<SelectList
+								lists={this.props.lists}
+								onCurrentListChange={this.onCurrentListChange}
+								currentListId={this.props.currentListId}
+							/>
+						</Col>
+					</Row>
+				</Container>
 				<ListsPage
 					lists={this.props.lists}
 					onSearch={this.onSearch}
