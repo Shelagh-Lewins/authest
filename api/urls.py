@@ -4,8 +4,11 @@ from django.contrib.auth import views
 from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
 from .forms import SetPasswordFormCustom
+from .forms import PasswordResetFormCustom
 
 urlpatterns = [
+    path('password/reset/', views.PasswordResetView.as_view(form_class=PasswordResetFormCustom),
+        name='rest_password_reset'),
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('users/', include('users.urls')),

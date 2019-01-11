@@ -4,9 +4,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { forgotPassword, forgotPasswordEmailNotSent } from '../modules/auth';
+import * as auth from '../modules/auth';
 import { Container, Row, Col, Label, Input } from 'reactstrap';
 import ValidatedForm from './ValidatedForm.js';
+import FlashMessage from '../components/FlashMessage';
+import formatErrorMessages from '../modules/formatErrorMessages';
+import isEmpty from '../modules/isEmpty';
+import { clearErrors } from '../modules/errors';
 
 class ForgotPassword extends Component {
 	constructor() {
@@ -29,7 +33,7 @@ class ForgotPassword extends Component {
 		if(this.props.auth.isAuthenticated) {
 			this.props.history.push('/');
 		}
-		this.props.forgotPasswordEmailNotSent();
+		this.props.dispatch(auth.forgotPasswordEmailNotSent());
 	}
 
 	handleInputChange(e) {
@@ -38,17 +42,31 @@ class ForgotPassword extends Component {
 		});
 	}
 
+	onCloseFlashMessage = () => {
+		this.props.dispatch(clearErrors());
+	}
+
 	handleSubmit(e) {
 		e.preventDefault();
 		const user = {
 			'email': this.state.email,
 		};
-		this.props.forgotPassword(user);
+		this.props.dispatch(auth.forgotPassword(user));
 	}
 
 	render() {
 		return(
 			<Container>
+				{!isEmpty(this.props.errors) &&
+				<Row>
+					<Col>
+						<FlashMessage
+							message={formatErrorMessages(this.props.errors)}
+							type="error"
+							onClick={this.onCloseFlashMessage}
+						/>
+					</Col>
+				</Row>}
 				<h2>Forgot your password?</h2>
 				<p>Enter your email address. A reset password link will be emailed to you.</p>
 				<ValidatedForm onSubmit={ this.handleSubmit }>
@@ -97,7 +115,9 @@ ForgotPassword.propTypes = {
 
 const mapStateToProps = (state) => ({
 	'auth': state.auth,
-	'errors': state.errors
+	'errors': state.errors,
+	'forgotPassword': auth.forgotPassword,
+	'forgotPasswordEmailNotSent': auth.forgotPasswordEmailNotSent,
 });
 
-export default connect(mapStateToProps, { forgotPassword, forgotPasswordEmailNotSent })(ForgotPassword);
+export default connect(mapStateToProps)(ForgotPassword);
