@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Row } from 'reactstrap';
 import ItemsList from './ItemsList';
 import { MAX_ITEMS_IN_LIST } from '../constants';
 import './Items.scss';
@@ -75,38 +76,40 @@ class ItemsPage extends Component {
 	render() {
 		return (
 			<div className="items-list">
-				<div className="items-list-header">
-					<button
-						className="button button-default"
-						onClick={this.toggleForm}
-					>
-					+ New item</button>
-				</div>
-
-				{this.state.showNewItemForm && (
-					<form className="items-list-form" onSubmit={this.onCreateItem}>
-						<input
-							className="full-width-input"
-							onChange={this.onTitleChange}
-							value={this.state.title}
-							type="text"
-							placeholder="title"
-						/>
-						<input
-							className="full-width-input"
-							onChange={this.onDescriptionChange}
-							value={this.state.description}
-							type="text"
-							placeholder="description"
-						/>
+				<Container className="items-list-header">
+					<Row>
 						<button
-							className="button"
-							type="submit"
+							className="button button-default"
+							onClick={this.toggleForm}
 						>
-								Save
-						</button>
-					</form>
-				)}
+						+ New item</button>
+					</Row>
+
+					{this.state.showNewItemForm && (
+						<form className="items-list-form" onSubmit={this.onCreateItem}>
+							<input
+								className="full-width-input"
+								onChange={this.onTitleChange}
+								value={this.state.title}
+								type="text"
+								placeholder="title"
+							/>
+							<input
+								className="full-width-input"
+								onChange={this.onDescriptionChange}
+								value={this.state.description}
+								type="text"
+								placeholder="description"
+							/>
+							<button
+								className="button"
+								type="submit"
+							>
+									Save
+							</button>
+						</form>
+					)}
+				</Container>
 
 				{this.renderItemsList()}
 			</div>

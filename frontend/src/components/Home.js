@@ -58,6 +58,7 @@ class Home extends Component {
 
 	render() {
 		return (
+			<div>
 			<Container>
 				<Row>
 					<Col>
@@ -69,11 +70,14 @@ class Home extends Component {
 					/>}
 					</Col>
 				</Row>
+			</Container>
+			<Container>
 				<SelectList
 					lists={this.props.lists}
 					onCurrentListChange={this.onCurrentListChange}
 					currentListId={this.props.currentListId}
 				/>
+			</Container>
 				<ListsPage
 					lists={this.props.lists}
 					onSearch={this.onSearch}
@@ -88,7 +92,7 @@ class Home extends Component {
 					currentListId={this.props.currentListId}
 					onDeleteItem={this.onDeleteItem}
 				/>
-			</Container>
+			</div>
 		);
 	}
 }
