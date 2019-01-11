@@ -119,4 +119,4 @@ const mapStateToProps = (state) => ({
 	'currentListId': state.page.currentListId,
 });
 
-export  default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Home);
