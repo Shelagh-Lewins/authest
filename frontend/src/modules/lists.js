@@ -53,16 +53,21 @@ export function fetchLists() {
 			'method': 'GET',
 		}).then(response => {
 	    const normalizedData = normalize(response, [listSchema]);
+	    let defaultListId = null;
 
-			if (!getState().page.currentListId) {
-				const defaultListId = response[0].id;
-				dispatch(setCurrentListId(defaultListId));
+			if (normalizedData.result.length > 0) { // there is at least one list
+				defaultListId = response[0].id;
 			}
 
+			if (!getState().page.currentListId) { // preserve existing selection
+				// TODO check that this list still exists
+				dispatch(setCurrentListId(defaultListId));
+			}
+			
 			return dispatch(receiveEntities(normalizedData));
 		}).catch(error => {
 			dispatch(fetchListsFailed());
-			console.log('error message ', error.message);
+
 			return dispatch(getErrors({ 'fetch lists': error.message }));
 		});
 	};
@@ -98,25 +103,21 @@ export function createListSucceeded(list) {
 	};
 }
 
-export const deleteList = id => dispatch => {
+export const deleteList = id => (dispatch, getState) => {
 	return fetchAPI({
 		'url': `/api/v1/content/lists/${id}/`,
 		'method': 'DELETE',
 	}).then(response => {
-	    return dispatch(deleteListSucceeded(id));
+		// deleted the selected list
+		if (id === getState().page.currentListId) {
+			dispatch(setCurrentListId(null));
+		}
+
+	  return dispatch(deleteListSucceeded(id));
 	}).catch(error => {
 		return dispatch(getErrors({ 'delete list': error.message }));
 	});
 };
-
-export function deleteListSucceeded(id) {
-	return {
-		'type': DELETE_LIST_SUCCEEDED,
-		'payload': {
-			id
-		}
-	};
-}
 
 export const setListIsPublic = ({ id, is_public }) => dispatch => {
 	return fetchAPI({
@@ -130,6 +131,15 @@ export const setListIsPublic = ({ id, is_public }) => dispatch => {
 		return dispatch(getErrors({ 'set list is public': error.message }));
 	});
 };
+
+export function deleteListSucceeded(id) {
+	return {
+		'type': DELETE_LIST_SUCCEEDED,
+		'payload': {
+			id
+		}
+	};
+}
 
 export function setListIsPublicSucceeded({ id, is_public }) {
 	return {
@@ -208,11 +218,13 @@ export default function lists(state = initialListsState, action) {
 	switch (action.type) {
 		case RECEIVE_ENTITIES: {
 			const { entities } = action.payload;
+			let lists = {};
+
 			if (entities && entities.lists) {
-				return updeep({ 'things': entities.lists, 'isLoading': false }, state);
+				lists = entities.lists; // there is at least one list
 			}
 
-			return state;
+			return updeep({ 'things': lists, 'isLoading': false }, state);
 		}
 
 		case FETCH_LISTS_STARTED: {
@@ -229,6 +241,7 @@ export default function lists(state = initialListsState, action) {
 		}
 
 		case DELETE_LIST_SUCCEEDED: {
+			console.log('succeeded. id ', action.payload.id);
 			return updeep({ 'things': updeep.omit([action.payload.id]) }, state);
 		}
 

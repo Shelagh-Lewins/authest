@@ -56,17 +56,21 @@ class ListsPage extends Component {
 	renderListsList() {
 		const { lists, onIsPublicChange, onDeleteList } = this.props;
 
-		return Object.keys(lists).map(is_public => {
+		return Object.keys(lists).map((is_public, index) => {
 			const listsByIsPublic = lists[is_public];
 
 			return (
-				<ListsList
-					lists={listsByIsPublic}
-					onIsPublicChange={onIsPublicChange}
-					onDeleteList={onDeleteList}
-					is_public={is_public}
-					key={is_public}
-				/>
+				<div key={index}>
+					{(listsByIsPublic.length > 0) && (
+						<ListsList
+							lists={listsByIsPublic}
+							onIsPublicChange={onIsPublicChange}
+							onDeleteList={onDeleteList}
+							is_public={is_public}
+							key={is_public}
+						/>
+					)}
+				</div>
 			);
 		});
 	}
@@ -96,28 +100,30 @@ class ListsPage extends Component {
 					</div>
 				</Container>
 				{this.state.showNewCardForm && (
-					<form className="lists-list-form" onSubmit={this.onCreateList}>
-						<input
-							className="full-width-input"
-							onChange={this.onTitleChange}
-							value={this.state.title}
-							type="text"
-							placeholder="title"
-						/>
-						<input
-							className="full-width-input"
-							onChange={this.onDescriptionChange}
-							value={this.state.description}
-							type="text"
-							placeholder="description"
-						/>
-						<button
-							className="button"
-							type="submit"
-						>
-								Save
-						</button>
-					</form>
+					<Container>
+						<form className="lists-list-form" onSubmit={this.onCreateList}>
+							<input
+								className="full-width-input"
+								onChange={this.onTitleChange}
+								value={this.state.title}
+								type="text"
+								placeholder="title"
+							/>
+							<input
+								className="full-width-input"
+								onChange={this.onDescriptionChange}
+								value={this.state.description}
+								type="text"
+								placeholder="description"
+							/>
+							<button
+								className="button"
+								type="submit"
+							>
+									Save
+							</button>
+						</form>
+					</Container>
 				)}
 				<div className="lists">
 					{this.renderListsList()}

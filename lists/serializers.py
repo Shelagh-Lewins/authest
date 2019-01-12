@@ -29,4 +29,4 @@ class ListSerializer(DynamicModelSerializer):
 class ItemSerializer(DynamicModelSerializer):
     class Meta:
         model = Item
-        fields = ('id', 'title', 'description', 'slug', 'created_at', 'modified_at', 'list', 'order')
+        fields = ('id', 'title', 'description', 'slug', 'modified_at', 'list', 'order')

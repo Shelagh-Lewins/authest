@@ -32,7 +32,6 @@ class Home extends Component {
 	}
 
 	onCreateList = ({ title, description }) => {
-		console.log('onCreateList firing');
 		this.props.dispatch(lists.createList({ title, description }));
 	}
 
@@ -90,12 +89,14 @@ class Home extends Component {
 					onDeleteList={this.onDeleteList}
 					isLoading={this.props.isLoading}
 				/>
-				<ItemsPage
-					items={this.props.items}
-					onCreateItem={this.onCreateItem}
-					currentListId={this.props.currentListId}
-					onDeleteItem={this.onDeleteItem}
-				/>
+				{this.props.currentListId && (
+					<ItemsPage
+						items={this.props.items}
+						onCreateItem={this.onCreateItem}
+						currentListId={this.props.currentListId}
+						onDeleteItem={this.onDeleteItem}
+					/>
+				)}
 			</div>
 		);
 	}

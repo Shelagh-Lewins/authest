@@ -19,13 +19,16 @@ export default class SelectList extends Component {
 			return options;
 		});
 
-		// don't render select until default selection is available
+		// if previously selected list has been deleted, there should be no selection
+		const currentListId = this.props.currentListId || '';
+
+		// don't render select until lists are available
 		return (
 			<div className="header">
-				{this.props.currentListId && (
+				{this.props.lists && (
 					<div className="list-select">
 						<label>List:
-							<select onChange={this.props.onCurrentListChange} className="list-menu form-control" value={this.props.currentListId}>
+							<select onChange={this.props.onCurrentListChange} className="list-menu form-control" value={currentListId}>
 								{listOptions}
 							</select>
 						</label>
