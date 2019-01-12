@@ -52,8 +52,8 @@ export function fetchLists() {
 			'url': '/api/v1/content/lists/',
 			'method': 'GET',
 		}).then(response => {
-	    const normalizedData = normalize(response, [listSchema]);
-	    let defaultListId = null;
+			const normalizedData = normalize(response, [listSchema]);
+			let defaultListId = null;
 
 			if (normalizedData.result.length > 0) { // there is at least one list
 				defaultListId = response[0].id;
@@ -88,7 +88,8 @@ export const createList = list => dispatch => {
 		'useAuth': true,
 		'headers': { 'Content-Type': 'application/json' },
 	}).then(response => {
-	    return dispatch(createListSucceeded(response));
+		dispatch(setCurrentListId(response.id));
+		return dispatch(createListSucceeded(response));
 	}).catch(error => {
 		return dispatch(getErrors({ 'create list': error.message }));
 	});
@@ -113,7 +114,7 @@ export const deleteList = id => (dispatch, getState) => {
 			dispatch(setCurrentListId(null));
 		}
 
-	  return dispatch(deleteListSucceeded(id));
+		return dispatch(deleteListSucceeded(id));
 	}).catch(error => {
 		return dispatch(getErrors({ 'delete list': error.message }));
 	});
@@ -126,7 +127,7 @@ export const setListIsPublic = ({ id, is_public }) => dispatch => {
 		'data': JSON.stringify({ is_public }),
 		'method': 'PATCH',
 	}).then(response => {
-	    return dispatch(setListIsPublicSucceeded(response));
+			return dispatch(setListIsPublicSucceeded(response));
 	}).catch(error => {
 		return dispatch(getErrors({ 'set list is public': error.message }));
 	});
