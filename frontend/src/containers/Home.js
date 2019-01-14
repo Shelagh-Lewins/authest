@@ -20,7 +20,15 @@ import { clearErrors } from '../modules/errors';
 
 class Home extends Component {
 	componentDidMount() {
+		console.log('home component did mount');
 		this.props.dispatch(lists.fetchLists());
+	}
+
+	componentDidUpdate(prevProps){
+		// If the user's status has changed, refresh Lists
+		if(prevProps.auth.user.token !== this.props.auth.user.token){
+			this.props.dispatch(lists.fetchLists());
+		}
 	}
 
 	onCurrentListChange = e => {

@@ -5,6 +5,10 @@ import { getErrors } from '../modules/errors';
 import { normalize, schema } from 'normalizr';
 
 import {
+	LOGOUT_USER_COMPLETE
+} from './auth';
+
+import {
 	CREATE_ITEM_SUCCEEDED,
 	DELETE_ITEM_SUCCEEDED
 } from './items';
@@ -48,10 +52,17 @@ export function fetchLists() {
 	return (dispatch, getState) => {
 		dispatch(fetchListsStarted());
 
+		// if the user is not logged in, don't use auth. The server should return lists whatever lists a non-authenticated user should see.
+		let useAuth = false;
+
+		if (getState().auth.user.token) {
+			useAuth = true;
+		}
+
 		return fetchAPI({
 			'url': '/api/v1/content/lists/',
 			'method': 'GET',
-			'useAuth': true,
+			'useAuth': useAuth,
 		}).then(response => {
 			const normalizedData = normalize(response, [listSchema]);
 			let defaultListId = null;
@@ -218,6 +229,10 @@ export const getGroupedAndFilteredLists = createSelector(
 // i.e. state.things here
 export default function lists(state = initialListsState, action) {
 	switch (action.type) {
+		case LOGOUT_USER_COMPLETE: {
+			return updeep(initialListsState, {});
+		}
+
 		case RECEIVE_ENTITIES: {
 			const { entities } = action.payload;
 			let lists = {};

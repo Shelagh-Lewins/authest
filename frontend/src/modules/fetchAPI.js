@@ -5,14 +5,15 @@ import store from '../store';
 import formatErrorMessages from '../modules/formatErrorMessages';
 
 export default function fetchAPI({ url, data, method = 'GET', useAuth = false, headers = {} }) {
-	// let headers = {};
 
 	if (useAuth) {
 		headers.Authorization = `Token ${store.getState().auth.user.token}`;
+		console.log('fetchApi with Token ', store.getState().auth.user);
 	}
 
 	return fetch(url, { headers, 'method': method, 'body': data })
 		.then(response => {
+			console.log('first response from fetch ', url);
 			// fetch returns ok true / false in most situations
 			// true is a successful response
 			if (response.ok) {

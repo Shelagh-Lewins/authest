@@ -2,6 +2,10 @@ import { RECEIVE_ENTITIES } from '../modules/lists';
 import fetchAPI from '../modules/fetchAPI';
 import { getErrors } from '../modules/errors';
 
+import {
+	LOGOUT_USER_COMPLETE
+} from './auth';
+
 //////////////////////////////////
 // Action creators
 
@@ -75,6 +79,10 @@ const initialItemsState = {
 
 export default function items(state = initialItemsState, action) {
 	switch (action.type) {
+		case LOGOUT_USER_COMPLETE: {
+			return updeep(initialItemsState, {});
+		}
+		
 		case RECEIVE_ENTITIES: {
 			const { entities } = action.payload;
 			if (entities && entities.items) {
