@@ -6,7 +6,6 @@ from django.db.models import Q
 
 class ListViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny, ]
-    # permission_classes = [permissions.IsAuthenticated, ]
     model = List
     serializer_class = ListSerializer
 
@@ -14,8 +13,6 @@ class ListViewSet(viewsets.ModelViewSet):
         if not self.request.user.is_authenticated:
           return List.objects.filter(is_public__exact=True)
 
-        # return List.objects.filter(created_by=self.request.user)
-        # return List.objects.filter(is_public__exact=True)
         return List.objects.filter(Q(created_by=self.request.user) | Q(is_public__exact=True))
     def pre_save(self, obj):
         obj.created_by = self.request.user
