@@ -5,7 +5,7 @@ from .api import ListViewSet
 from .api import ItemViewSet
 
 router = routers.DefaultRouter()
-router.register('lists', ListViewSet)
+router.register('lists', ListViewSet, base_name='Lists')
 router.register('items', ItemViewSet)
 
 urlpatterns = [

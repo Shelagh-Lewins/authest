@@ -30,7 +30,7 @@ class List(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_by = models.ForeignKey(USER, on_delete=models.CASCADE, related_name='list_created_by')
     created_at = models.DateTimeField(auto_now_add=True)
-    modified_by = models.ForeignKey(USER, on_delete=models.SET_NULL,null=True,
+    modified_by = models.ForeignKey(USER, on_delete=models.SET_NULL, null=True,
         related_name='list_modified_by')
     modified_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255)

@@ -51,6 +51,7 @@ export function fetchLists() {
 		return fetchAPI({
 			'url': '/api/v1/content/lists/',
 			'method': 'GET',
+			'useAuth': true,
 		}).then(response => {
 			const normalizedData = normalize(response, [listSchema]);
 			let defaultListId = null;
@@ -127,7 +128,7 @@ export const setListIsPublic = ({ id, is_public }) => dispatch => {
 		'data': JSON.stringify({ is_public }),
 		'method': 'PATCH',
 	}).then(response => {
-			return dispatch(setListIsPublicSucceeded(response));
+		return dispatch(setListIsPublicSucceeded(response));
 	}).catch(error => {
 		return dispatch(getErrors({ 'set list is public': error.message }));
 	});
