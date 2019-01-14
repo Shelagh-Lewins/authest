@@ -138,6 +138,7 @@ export const setListIsPublic = ({ id, is_public }) => dispatch => {
 		'headers': { 'Content-Type': 'application/json' },
 		'data': JSON.stringify({ is_public }),
 		'method': 'PATCH',
+		'useAuth': true,
 	}).then(response => {
 		return dispatch(setListIsPublicSucceeded(response));
 	}).catch(error => {

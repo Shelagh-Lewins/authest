@@ -20,7 +20,6 @@ import { clearErrors } from '../modules/errors';
 
 class Home extends Component {
 	componentDidMount() {
-		console.log('home component did mount');
 		this.props.dispatch(lists.fetchLists());
 	}
 
